@@ -3,2146 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Win Rate Counter - Track Your Gaming Performance</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Anichess Companion - Track Your Checkmate Arena Performance</title>
     <style>
-        :root {
-            /* Default Theme: Anichess Dark */
-            --bg-main: #0a0a0f;
-            --bg-panel: #141421;
-            --bg-card: #1a1a2e;
-
-            --text-primary: #e5e7eb;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
-
-            --accent: #3b82f6;
-            --accent-soft: rgba(59,130,246,0.15);
-
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-
-            --border-soft: rgba(255,255,255,0.08);
-            --shadow-soft: rgba(0,0,0,0.4);
-
-            /* Typography variables */
-            --font-weight-primary: 700;
-            --font-weight-secondary: 500;
-            --font-weight-muted: 400;
-            --letter-spacing-tight: -0.02em;
-            --letter-spacing-normal: 0;
-            --letter-spacing-wide: 0.05em;
-            
-            /* Font Family */
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        /* Theme Presets with Unique Designs */
-        .theme-anichess-dark {
-            --bg-main: #0a0a0f;
-            --bg-panel: #141421;
-            --bg-card: #1a1a2e;
-
-            --text-primary: #e5e7eb;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
-
-            --accent: #3b82f6;
-            --accent-soft: rgba(59,130,246,0.15);
-
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-
-            --border-soft: rgba(255,255,255,0.08);
-            --shadow-soft: rgba(0,0,0,0.4);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-anichess-void {
-            --bg-main: #050508;
-            --bg-panel: #0d0d14;
-            --bg-card: #141424;
-
-            --text-primary: #e6e6f0;
-            --text-secondary: #a1a1b8;
-            --text-muted: #6b6b80;
-
-            --accent: #8b5cf6;
-            --accent-soft: rgba(139,92,246,0.15);
-
-            --success: #22c55e;
-            --danger: #f43f5e;
-            --warning: #fbbf24;
-
-            --border-soft: rgba(255,255,255,0.06);
-            --shadow-soft: rgba(0,0,0,0.5);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-matrix-grind {
-            --bg-main: #050505;
-            --bg-panel: #0b0f0b;
-            --bg-card: #111811;
-
-            --text-primary: #d1fae5;
-            --text-secondary: #86efac;
-            --text-muted: #4ade80;
-
-            --accent: #22c55e;
-            --accent-soft: rgba(34,197,94,0.15);
-
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #facc15;
-
-            --border-soft: rgba(34,197,94,0.12);
-            --shadow-soft: rgba(0,0,0,0.6);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-ember-arena {
-            --bg-main: #0c0a09;
-            --bg-panel: #1c120c;
-            --bg-card: #26170f;
-
-            --text-primary: #fff7ed;
-            --text-secondary: #fed7aa;
-            --text-muted: #fdba74;
-
-            --accent: #f97316;
-            --accent-soft: rgba(249,115,22,0.18);
-
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #fb923c;
-
-            --border-soft: rgba(249,115,22,0.15);
-            --shadow-soft: rgba(0,0,0,0.55);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-minimal-light {
-            --bg-main: #f8fafc;
-            --bg-panel: #f1f5f9;
-            --bg-card: #ffffff;
-
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-
-            --accent: #2563eb;
-            --accent-soft: rgba(37,99,235,0.15);
-
-            --success: #16a34a;
-            --danger: #dc2626;
-            --warning: #d97706;
-
-            --border-soft: rgba(15,23,42,0.1);
-            --shadow-soft: rgba(15,23,42,0.12);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        /* Enhanced Minimal Light Theme Visibility */
-        .theme-minimal-light body {
-            color: #0f172a;
-            font-weight: 500;
-        }
-
-        .theme-minimal-light .panel-title {
-            color: #0f172a;
-            text-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
-        }
-
-        .theme-minimal-light .stat-label {
-            color: #334155;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .stat-value {
-            color: #0f172a;
-            font-weight: 700;
-        }
-
-        .theme-minimal-light .stat-value.wins { 
-            color: #16a34a;
-            text-shadow: 0 0 15px rgba(22, 163, 74, 0.2);
-        }
-
-        .theme-minimal-light .stat-value.losses { 
-            color: #dc2626;
-            text-shadow: 0 0 15px rgba(220, 38, 38, 0.2);
-        }
-
-        .theme-minimal-light .stat-value.total { 
-            color: #0f172a;
-            text-shadow: 0 0 10px rgba(15, 23, 42, 0.1);
-        }
-
-        .theme-minimal-light .stat-value.winrate {
-            color: #2563eb;
-            text-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
-            font-weight: 800;
-        }
-
-        .theme-minimal-light .counter-title {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .counter-stats {
-            color: #334155;
-            font-weight: 500;
-        }
-
-        .theme-minimal-light .form-input {
-            color: #0f172a;
-            font-weight: 500;
-            background: #ffffff;
-            border-color: #e2e8f0;
-        }
-
-        .theme-minimal-light .form-input:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
-        }
-
-        .theme-minimal-light .form-input::placeholder {
-            color: #94a3b8;
-        }
-
-        .theme-minimal-light .theme-name {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .keyboard-hint {
-            color: #64748b;
-            background: rgba(37, 99, 235, 0.1);
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .empty-title {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .empty-text {
-            color: #334155;
-            font-weight: 500;
-        }
-
-        /* Enhanced Typography */
-        body {
-            font-family: var(--font-primary);
-            background: var(--bg-main);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-normal);
-            font-optical-sizing: antialiased;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Better Typography for All Text */
-        /* Enhanced Panel Title - Premium Esports Grade */
-        .panel-title {
-            font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            letter-spacing: -0.005em;
-            font-family: var(--font-primary);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            position: relative;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-            width: 100%;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        @keyframes titleGlow {
-            0% { filter: brightness(1); }
-            100% { filter: brightness(1.05); }
-        }
-
-        .panel-title::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40%;
-            height: 1px;
-            background: var(--accent-soft);
-            border-radius: 1px;
-            animation: titleUnderline 3s ease-in-out infinite;
-        }
-
-        @keyframes titleUnderline {
-            0%, 100% { transform: translateX(-50%) scaleX(0); opacity: 0.3; }
-            50% { transform: translateX(-50%) scaleX(1); opacity: 0.6; }
-        }
-
-        /* Theme-specific title underline colors */
-        .theme-anichess-dark .panel-title::before {
-            background: rgba(59, 130, 246, 0.3);
-        }
-
-        .theme-anichess-void .panel-title::before {
-            background: rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-matrix-grind .panel-title::before {
-            background: rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-ember-arena .panel-title::before {
-            background: rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-minimal-light .panel-title::before {
-            background: rgba(37, 99, 235, 0.2);
-        }
-
-        .panel-title .title-text {
-            position: relative;
-            font-weight: 900;
-            letter-spacing: -0.005em;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        /* WIN RATE - Primary text */
-        .panel-title .title-text .win-rate {
-            color: var(--text-primary);
-            font-weight: 900;
-            letter-spacing: -0.005em;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        /* COUNTER - Accent text */
-        .panel-title .title-text .counter {
-            color: var(--accent);
-            font-weight: 800;
-            letter-spacing: 0;
-            opacity: 0.85;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-            font-weight: var(--font-weight-muted);
-            font-family: var(--font-primary);
-        }
-
-        .keyboard-hint {
-            font-size: 10px;
-            color: var(--text-muted);
-            background: var(--accent-soft);
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: auto;
-            font-weight: var(--font-weight-muted);
-            font-family: var(--font-mono);
-        }
-
-        .form-label {
-            display: block;
-            font-size: 12px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-            font-family: var(--font-primary);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--accent-soft);
-            border: 1px solid var(--border-soft);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-normal);
-            font-family: var(--font-primary);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-soft);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-muted);
-            font-family: var(--font-primary);
-        }
-
-        /* Theme-Specific Button Styles */
-        .btn {
-            padding: 16px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: var(--font-weight-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-            font-family: var(--font-primary);
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .btn .keyboard-hint {
-            position: absolute;
-            top: 4px;
-            right: 8px;
-            font-size: 9px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-family: var(--font-mono);
-        }
-
-        /* Theme-Specific Button Styles */
-        .theme-anichess-dark .btn-win {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-dark .btn-win:hover {
-            background: linear-gradient(135deg, #059669, #0ea834);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .theme-anichess-dark .btn-loss {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-dark .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-anichess-void .btn-win {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-void .btn-win:hover {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-anichess-void .btn-loss {
-            background: linear-gradient(135deg, #f43f5e, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-void .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-win {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-matrix-grind .btn-win:hover {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-loss {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-matrix-grind .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-ember-arena .btn-win {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-ember-arena .btn-win:hover {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-ember-arena .btn-loss {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-ember-arena .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
-        }
-
-        .theme-minimal-light .btn-win {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-minimal-light .btn-win:hover {
-            background: linear-gradient(135deg, #14b8a1, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-minimal-light .btn-loss {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-minimal-light .btn-loss:hover {
-            background: linear-gradient(135deg, #b91c1c, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-main: #0a0a0f;
+            --bg-secondary: #141421;
+            --bg-card: #1a1a2e;
+            
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            
+            --accent: #3b82f6;
+            --accent-soft: rgba(59,130,246,0.15);
+            --accent-hover: rgba(59,130,246,0.25);
+            
+            --success: #10b981;
+            --danger: #ef4444;
+            
+            --border-soft: rgba(255,255,255,0.08);
+            --border-medium: rgba(255,255,255,0.12);
+            
+            --shadow-soft: rgba(0,0,0,0.4);
+            --shadow-medium: rgba(0,0,0,0.6);
+            
+            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-primary);
             background: var(--bg-main);
             color: var(--text-primary);
-            min-height: 100vh;
+            line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-normal);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Chess Background Animation */
-        .chess-background {
+        /* Navigation */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.4;
-            overflow: hidden;
-        }
-
-        .chess-piece {
-            position: absolute;
-            font-size: 24px;
-            color: var(--accent-blue);
-            opacity: 0.3;
-            animation: float 25s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px var(--accent-blue));
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-
-        .chess-piece.white {
-            color: var(--accent-green);
-            filter: drop-shadow(0 0 15px var(--accent-green));
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-        }
-
-        .chess-piece.gold {
-            color: var(--accent-orange);
-            filter: drop-shadow(0 0 15px var(--accent-orange));
-            text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg); 
-                opacity: 0.3;
-            }
-            25% { 
-                transform: translateY(-30px) rotate(8deg); 
-                opacity: 0.5;
-            }
-            50% { 
-                transform: translateY(15px) rotate(-5deg); 
-                opacity: 0.4;
-            }
-            75% { 
-                transform: translateY(-20px) rotate(3deg); 
-                opacity: 0.6;
-            }
-        }
-
-        @keyframes drift {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(30px); }
-            100% { transform: translateX(0); }
-        }
-
-        /* Enhanced Design Elements */
-        .container {
-            display: flex;
-            height: 100vh;
-            position: relative;
-            z-index: 1;
-            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-        }
-
-        /* Enhanced Panel Headers */
-        .panel-header {
-            padding: 24px;
+            right: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-soft);
-            background: var(--bg-card);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .panel-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Enhanced Counter Items */
-        .counter-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .counter-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .counter-item:hover::before {
-            opacity: 1;
-        }
-
-        /* Enhanced Stat Cards */
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .stat-card:hover::after {
-            opacity: 1;
-        }
-
-        /* Enhanced Buttons */
-        .btn {
-            padding: 16px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: var(--font-weight-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-            font-family: var(--font-primary);
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .btn:active::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Enhanced Progress Bar */
-        .progress-bar-container {
-            background: var(--accent-soft);
-            border-radius: 12px;
-            height: 20px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid var(--border-soft);
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 12px;
-            transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: progressShimmer 2s infinite;
-        }
-
-        @keyframes progressShimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Enhanced Modal */
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 24px;
-            width: 90%;
-            max-width: 450px;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--success), var(--danger));
-            border-radius: 16px 16px 0 0;
-        }
-
-        /* Enhanced Footer */
-        .footer {
-            background: var(--bg-panel);
-            border-top: 1px solid var(--border-soft);
-            padding: 20px 24px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-secondary);
-            opacity: 0.9;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        /* Enhanced Theme Picker */
-        .theme-preview {
-            background: var(--bg-card);
-            border: 2px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .theme-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .theme-preview:hover::before {
-            opacity: 1;
-        }
-
-        /* Floating Particles */
-        .floating-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.3;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) translateX(0); 
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            50% { 
-                transform: translateY(-100px) translateX(50px); 
-            }
-        }
-
-        /* Enhanced Win Rate Display */
-        .stat-value.winrate {
-            position: relative;
-            display: inline-block;
-        }
-
-        .stat-value.winrate::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, var(--accent), var(--success), var(--accent));
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: -1;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.1; }
-            50% { transform: scale(1.1); opacity: 0.2; }
-        }
-
-        /* Enhanced Empty State */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-secondary);
-            text-align: center;
-            position: relative;
-        }
-
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        /* Left Panel */
-        .left-panel {
-            width: 360px;
-            background: var(--bg-panel);
-            border-right: 1px solid var(--border-soft);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .panel-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--border-soft);
-            background: var(--bg-card);
-        }
-
-        /* Theme-Specific Footer Styles */
-        .theme-anichess-dark .footer {
-            background: var(--bg-panel);
-            border-top: 1px solid var(--border-soft);
-        }
-
-        .theme-anichess-void .footer {
-            background: #0d0d14;
-            border-top: 1px solid rgba(139, 92, 246, 0.1);
-        }
-
-        .theme-matrix-grind .footer {
-            background: #0b0f0b;
-            border-top: 1px solid rgba(34, 197, 94, 0.1);
-        }
-
-        .theme-ember-arena .footer {
-            background: #1c120c;
-            border-top: 1px solid rgba(249, 115, 22, 0.1);
-        }
-
-        .theme-minimal-light .footer {
-            background: #f1f5f9;
-            border-top: 1px solid rgba(15, 23, 42, 0.1);
-        }
-
-        .theme-picker-btn {
-            background: var(--accent-soft);
-            border: 1px solid var(--border-soft);
-            color: var(--text-secondary);
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-            margin-left: auto;
-            font-weight: var(--font-weight-muted);
-        }
-
-        .theme-picker-btn:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .keyboard-hint {
-            font-size: 10px;
-            color: var(--text-muted);
-            background: var(--accent-soft);
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: auto;
-            font-weight: var(--font-weight-muted);
-        }
-
-        .add-counter-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .add-counter-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-soft);
-            filter: brightness(1.1);
-        }
-
-        .counters-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-        }
-
-        .counter-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        /* Theme-Specific Counter Item Hover Effects */
-        .theme-anichess-dark .counter-item:hover {
-            background: var(--accent-soft);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        }
-
-        .theme-anichess-void .counter-item:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
-        }
-
-        .theme-matrix-grind .counter-item:hover {
-            background: rgba(34, 197, 94, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
-        }
-
-        .theme-ember-arena .counter-item:hover {
-            background: rgba(249, 115, 22, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
-        }
-
-        .theme-minimal-light .counter-item:hover {
-            background: rgba(37, 99, 235, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-        }
-
-        .counter-item.active {
-            background: var(--accent-soft);
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-soft);
-        }
-
-        .counter-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .counter-title {
-            font-size: 16px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            flex: 1;
-            margin-right: 8px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .trend-indicator {
-            font-size: 12px;
-            margin-left: 4px;
-        }
-
-        .trend-up { color: var(--success); }
-        .trend-down { color: var(--danger); }
-        .trend-stable { color: var(--text-muted); }
-
-        .win-rate-pill {
-            background: var(--accent);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: var(--font-weight-secondary);
-            min-width: 45px;
-            text-align: center;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .counter-stats {
-            display: flex;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .stat-wins { color: var(--success); }
-        .stat-losses { color: var(--danger); }
-
-        /* Progress Bar Styles */
-        .progress-section {
-            margin-bottom: 24px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .progress-title {
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .progress-text {
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .progress-bar-container {
-            background: var(--accent-soft);
-            border-radius: 12px;
-            height: 20px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid var(--border-soft);
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 12px;
-            transition: width 0.5s ease;
-            position: relative;
-        }
-
-        .progress-bar-fill.low {
-            background: var(--danger);
-        }
-
-        .progress-bar-fill.medium {
-            background: var(--warning);
-        }
-
-        .progress-bar-fill.high {
-            background: var(--success);
-        }
-
-        .progress-percentage {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            font-size: 11px;
-            font-weight: var(--font-weight-secondary);
-            color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            line-height: 20px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            padding: 0 2rem;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 24px;
-            width: 90%;
-            max-width: 450px;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: var(--font-weight-primary);
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .modal-subtitle {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 12px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--accent-soft);
-            border: 1px solid var(--border-soft);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-soft);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .modal-buttons {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .modal-btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .modal-btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .modal-btn-secondary {
-            background: var(--accent-soft);
-            color: var(--text-primary);
-            border: 1px solid var(--border-soft);
-        }
-
-        .modal-btn-secondary:hover {
-            background: var(--bg-panel);
-        }
-
-        /* Theme Picker Styles */
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .theme-option {
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .theme-option:hover {
-            transform: scale(1.05);
-        }
-
-        .theme-preview {
-            background: var(--bg-card);
-            border: 2px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .theme-preview:hover {
-            border-color: var(--accent);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .theme-preview.theme-anichess-dark-preview {
-            background: #0a0a0f;
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        .theme-preview.theme-anichess-void-preview {
-            background: #050508;
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-preview.theme-matrix-grind-preview {
-            background: #050505;
-            border-color: rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-preview.theme-ember-arena-preview {
-            background: #0c0a09;
-            border-color: rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-preview.theme-minimal-light-preview {
-            background: #f8fafc;
-            border-color: rgba(37, 99, 235, 0.3);
-            color: #0f172a;
-        }
-
-        .theme-name {
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
-            margin-bottom: 8px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .theme-colors {
-            display: flex;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .theme-colors span {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .theme-minimal-light-preview .theme-colors span {
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-
-        /* Right Panel */
-        .right-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .counter-details {
-            flex: 1;
-            padding: 32px;
-            overflow-y: auto;
-        }
-
-        .empty-state {
-            display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-secondary);
-            text-align: center;
+            padding: 1rem 0;
         }
 
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        .empty-title {
-            font-size: 20px;
-            font-weight: var(--font-weight-secondary);
-            margin-bottom: 8px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .empty-text {
-            font-size: 14px;
-        }
-
-        .counter-detail-header {
-            margin-bottom: 24px;
-        }
-
-        .detail-title-input {
-            font-size: 28px;
-            font-weight: var(--font-weight-primary);
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            width: 100%;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s ease;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .detail-title-input:focus {
-            outline: none;
-            border-bottom-color: var(--accent);
-            box-shadow: 0 2px 8px var(--accent-soft);
-        }
-
-        .detail-title-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Theme-Specific Hover Effects */
-        .theme-anichess-dark .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-        }
-
-        .theme-anichess-dark .btn-win:hover {
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .theme-anichess-dark .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-anichess-void .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-anichess-void .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-anichess-void .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
-        }
-
-        .theme-matrix-grind .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-matrix-grind .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-ember-arena .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-ember-arena .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-ember-arena .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
-        }
-
-        .theme-minimal-light .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-        }
-
-        .theme-minimal-light .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-minimal-light .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card.win-rate {
-            background: var(--accent-soft);
-            border-color: var(--accent);
-        }
-
-        .stat-card.win-rate::before {
-            background: var(--accent);
-            opacity: 1;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-            font-weight: var(--font-weight-muted);
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: var(--font-weight-primary);
-            line-height: 1;
-            position: relative;
-            display: inline-block;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .stat-value.wins { 
-            color: var(--success);
-            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-        }
-
-        .stat-value.losses { 
-            color: var(--danger);
-            text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-        }
-
-        .stat-value.total { 
-            color: var(--text-primary);
-            text-shadow: 0 0 10px rgba(229, 231, 235, 0.2);
-        }
-
-        .stat-value.winrate { 
-            color: var(--accent);
-            font-size: 32px;
-            font-weight: 800;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            position: relative;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .theme-anichess-void .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-matrix-grind .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-ember-arena .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-minimal-light .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
-        }
-
-        .stat-value.winrate::after {
-            content: '%';
-            font-size: 18px;
-            font-weight: var(--font-weight-secondary);
-            margin-left: 2px;
-            color: var(--accent);
-        }
-
-        .modal-btn-secondary {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .modal-btn-secondary:hover {
-            background: var(--bg-secondary);
-        }
-
-        /* Right Panel - Counter Details */
-        .right-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .counter-details {
-            flex: 1;
-            padding: 32px;
-            overflow-y: auto;
-        }
-
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-secondary);
-            text-align: center;
-        }
-
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        .empty-title {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .empty-text {
-            font-size: 14px;
-        }
-
-        .counter-detail-header {
-            margin-bottom: 32px;
-        }
-
-        .detail-title-input {
-            font-size: 28px;
-            font-weight: 600;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            width: 100%;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s ease;
-        }
-
-        .detail-title-input:focus {
-            outline: none;
-            border-bottom-color: var(--accent-blue);
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-        }
-
-        .detail-title-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-blue);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-blue);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card.win-rate {
-            background: linear-gradient(135deg, var(--bg-card), rgba(59, 130, 246, 0.1));
-            border-color: var(--accent-blue);
-        }
-
-        .stat-card.win-rate::before {
-            background: var(--gradient-blue);
-            opacity: 1;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-value {
-            font-size: 28px;
+        .nav-brand {
+            font-size: 1.5rem;
             font-weight: 700;
-            line-height: 1;
-            position: relative;
-            display: inline-block;
-        }
-
-        .stat-value.wins { 
-            color: var(--accent-green);
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-        }
-
-        .stat-value.losses { 
-            color: var(--accent-red);
-            text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-        }
-
-        .stat-value.total { 
             color: var(--text-primary);
-            text-shadow: 0 0 10px rgba(229, 231, 235, 0.2);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 24px;
+        .nav-brand::before {
+            content: '♔';
+            font-size: 1.8rem;
+            color: var(--accent);
         }
 
-        .btn {
-            padding: 16px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link.coming-soon {
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .nav-link.coming-soon::after {
+            content: 'Coming soon';
+            position: absolute;
+            bottom: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link.coming-soon:hover::after {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            padding: 6rem 2rem 4rem;
             position: relative;
-            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
         }
 
-        /* Theme-Specific Button Effects */
-        .theme-anichess-dark .btn-win {
-            background: var(--success);
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #2563eb);
             color: white;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
         }
 
-        .theme-anichess-dark .btn-win:hover {
-            background: #059669;
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .theme-anichess-dark .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-anichess-dark .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-anichess-void .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-anichess-void .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-anichess-void .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-anichess-void .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-matrix-grind .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-matrix-grind .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-ember-arena .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-ember-arena .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-ember-arena .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-ember-arena .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
-        }
-
-        .theme-minimal-light .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-minimal-light .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-minimal-light .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-minimal-light .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .btn .keyboard-hint {
-            position: absolute;
-            top: 4px;
-            right: 8px;
-            font-size: 9px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-
-        .secondary-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 8px;
-            margin-bottom: 20px;
+            box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
         }
 
         .btn-secondary {
-            padding: 10px 16px;
             background: var(--bg-card);
             color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            border: 1px solid var(--border-medium);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-hover);
-            border-color: var(--accent-blue);
+            background: var(--bg-secondary);
+            border-color: var(--accent);
+            transform: translateY(-2px);
         }
 
-        .btn-secondary .keyboard-hint {
-            font-size: 9px;
-            background: var(--bg-hover);
-            color: var(--text-muted);
-            padding: 1px 4px;
-            border-radius: 3px;
+        /* Sections */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .btn-danger {
-            color: var(--accent-red);
-            border-color: var(--accent-red);
-        }
-
-        .btn-danger:hover {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: var(--accent-red);
-        }
-
-        /* History Section */
-        .history-section {
-            margin-top: 32px;
-        }
-
-        .history-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 16px;
+        .section-title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
             color: var(--text-primary);
         }
 
-        .history-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 200px;
-            overflow-y: auto;
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .history-item {
+        /* How It Works */
+        .how-it-works {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin: 4rem auto;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            color: white;
         }
 
-        .history-item.win {
-            border-left: 3px solid var(--accent-green);
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
-        .history-item.loss {
-            border-left: 3px solid var(--accent-red);
-        }
-
-        .history-time {
+        .step-description {
             color: var(--text-secondary);
-            font-size: 12px;
-            margin-left: auto;
+            line-height: 1.7;
         }
 
-        /* Mobile Responsive */
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--accent-soft), rgba(59,130,246,0.05));
+            border-radius: 20px;
+            margin: 4rem auto;
+            max-width: 1000px;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .cta-description {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-soft);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-cta {
                 flex-direction: column;
+                align-items: center;
             }
 
-            .left-panel {
+            .btn-primary, .btn-secondary {
                 width: 100%;
-                height: 40vh;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
+                max-width: 300px;
             }
 
-            .right-panel {
-                height: 60vh;
+            .steps {
+                grid-template-columns: 1fr;
             }
 
-            .counter-details {
-                padding: 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            .stat-card {
-                padding: 16px;
-            }
-
-            .stat-value {
-                font-size: 24px;
-            }
-
-            .action-buttons {
+            .features {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Animations */
-        @keyframes slideIn {
+        /* Animation */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -2150,1037 +417,173 @@
             }
         }
 
-        @keyframes celebrate {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .counter-item {
-            animation: slideIn 0.3s ease;
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-blue);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 20px 24px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-secondary);
-            opacity: 0.9;
-        }
-
-        .footer-credit {
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        .footer-support {
-            margin-bottom: 10px;
-            opacity: 0.7;
-        }
-
-        .wallet-address {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-hover);
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            display: inline-block;
-            margin: 8px 0;
-            font-size: 10px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .wallet-address:hover {
-            background: var(--accent-blue);
-            color: white;
-            border-color: var(--accent-blue);
-        }
-
-        .copy-btn {
-            font-size: 11px;
-            padding: 6px 12px;
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-left: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background: var(--accent-blue-hover);
-            transform: translateY(-1px);
-        }
-
-        .copy-btn.copied {
-            background: var(--accent-green);
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .chess-piece {
-                animation: none;
-            }
-            
-            * {
-                transition: none !important;
-            }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <!-- Chess Background Animation -->
-    <div class="chess-background" id="chessBackground"></div>
-    
-    <!-- Floating Particles -->
-    <div class="floating-particles" id="floatingParticles"></div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-brand">Anichess Companion</a>
+            <div class="nav-menu">
+                <a href="/tracker/" class="nav-link">Tracker</a>
+                <a href="/leaderboard/" class="nav-link coming-soon">Leaderboard</a>
+                <a href="/matches/" class="nav-link coming-soon">Matches</a>
+                <a href="/profile/" class="nav-link coming-soon">Profiles</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="container">
-        <!-- Left Panel -->
-        <aside class="left-panel">
-            <div class="panel-header">
-                <h1 class="panel-title">
-                    <span class="title-text">
-                        <span class="win-rate">WIN RATE</span>
-                        <span class="counter">COUNTER</span>
-                    </span>
-                </h1>
-                <div style="display: flex; gap: 8px;">
-                    <button class="theme-picker-btn" onclick="showThemePicker()">🎨</button>
-                    <button class="add-counter-btn" onclick="addNewCounter()">
-                        <span>+</span>
-                        <span>Add New Counter</span>
-                    </button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in-up">
+            <h1 class="hero-title">Track Your Anichess Performance</h1>
+            <p class="hero-subtitle">A companion tool for Checkmate Arena players who want to track wins, analyze performance, and climb the rankings.</p>
+            <div class="hero-cta">
+                <a href="#" class="btn-primary">
+                    <span>📥</span>
+                    <span>Download Chrome Extension</span>
+                </a>
+                <a href="/tracker/" class="btn-secondary">
+                    <span>📊</span>
+                    <span>Open Tracker</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section">
+        <div class="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simple setup, powerful insights</p>
+            
+            <div class="steps">
+                <div class="step fade-in-up">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Install Extension</h3>
+                    <p class="step-description">Add the Chrome extension to your browser. It's lightweight and only activates during Anichess matches.</p>
+                </div>
+                
+                <div class="step fade-in-up">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Track Performance</h3>
+                    <p class="step-description">Manually record wins and losses during Checkmate Arena matches with a single click.</p>
+                </div>
+                
+                <div class="step fade-in-up">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">View Insights</h3>
+                    <p class="step-description">Access detailed stats, rankings, and performance trends on the website.</p>
                 </div>
             </div>
-            <div class="counters-list" id="countersList">
-                <!-- Counters will be dynamically added here -->
-            </div>
-        </aside>
+        </div>
+    </section>
 
-        <!-- Right Panel -->
-        <main class="right-panel">
-            <div class="counter-details" id="counterDetails">
-                <div class="empty-state">
-                    <div class="empty-icon">📊</div>
-                    <h2 class="empty-title">No Counter Selected</h2>
-                    <p class="empty-text">Select a counter from the left or create a new one to start tracking your win rate</p>
-                </div>
+    <!-- Features -->
+    <section class="section">
+        <h2 class="section-title">Why Use Anichess Companion</h2>
+        <p class="section-subtitle">Built for serious players who care about improvement</p>
+        
+        <div class="features">
+            <div class="feature-card fade-in-up">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Performance Tracking</h3>
+                <p class="feature-description">Track daily and monthly performance metrics. Monitor win rates, streaks, and progress over time.</p>
             </div>
-        </main>
-    </div>
+            
+            <div class="feature-card fade-in-up">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Arena Leaderboards</h3>
+                <p class="feature-description">Compete on Checkmate Arena-specific leaderboards. See how you rank against other dedicated players.</p>
+            </div>
+            
+            <div class="feature-card fade-in-up">
+                <div class="feature-icon">👤</div>
+                <h3 class="feature-title">Player Profiles</h3>
+                <p class="feature-description">Create a profile linked to your Anichess account. Showcase your achievements and track your journey.</p>
+            </div>
+            
+            <div class="feature-card fade-in-up">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Focused Tracking</h3>
+                <p class="feature-description">Designed specifically for Checkmate Arena. No unnecessary features - just what serious players need.</p>
+            </div>
+            
+            <div class="feature-card fade-in-up">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Lightweight Extension</h3>
+                <p class="feature-description">Minimal impact on browser performance. Only activates when you're playing Anichess.</p>
+            </div>
+            
+            <div class="feature-card fade-in-up">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">Privacy First</h3>
+                <p class="feature-description">Your data belongs to you. No tracking beyond what's necessary for the service to function.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Ready to Level Up Your Game?</h2>
+        <p class="cta-description">Join serious Anichess players who are already tracking their performance and climbing the ranks.</p>
+        <div class="cta-buttons">
+            <a href="#" class="btn-primary">
+                <span>📥</span>
+                <span>Download Chrome Extension</span>
+            </a>
+            <a href="/tracker/" class="btn-secondary">
+                <span>📊</span>
+                <span>Open Tracker</span>
+            </a>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-credit">
-            <strong>Built by <a href="https://x.com/riisui_" target="_blank" style="color: var(--accent-blue); text-decoration: none;">@riisui_</a></strong>
-        </div>
-        <div class="footer-support">
-            Support continued development and help us keep this tool free for everyone
-        </div>
-        <div>
-            <button class="copy-btn" id="copyBtn" onclick="copyWalletAddress()">Copy Address</button>
-        </div>
-        <div style="margin-top: 8px; font-size: 10px; opacity: 0.5;">
-            ETH / EVM-compatible networks
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Support</a>
+                <a href="#" class="footer-link">GitHub</a>
+            </div>
+            <p>&copy; 2024 Anichess Companion. Built for players, by players.</p>
         </div>
     </footer>
 
-    <!-- Theme Picker Modal -->
-    <div class="modal-overlay" id="themePickerModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2 class="modal-title">Choose Theme</h2>
-                <p class="modal-subtitle">Select your preferred color scheme</p>
-            </div>
-            
-            <div class="theme-grid">
-                <div class="theme-option" onclick="setTheme('theme-anichess-dark')">
-                    <div class="theme-preview theme-anichess-dark-preview">
-                        <div class="theme-name">Anichess Dark</div>
-                        <div class="theme-colors">
-                            <span style="background: #3b82f6;"></span>
-                            <span style="background: #10b981;"></span>
-                            <span style="background: #ef4444;"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-anichess-void')">
-                    <div class="theme-preview theme-anichess-void-preview">
-                        <div class="theme-name">Anichess Void</div>
-                        <div class="theme-colors">
-                            <span style="background: #8b5cf6;"></span>
-                            <span style="background: #22c55e;"></span>
-                            <span style="background: #f43f5e;"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-matrix-grind')">
-                    <div class="theme-preview theme-matrix-grind-preview">
-                        <div class="theme-name">Matrix Grind</div>
-                        <div class="theme-colors">
-                            <span style="background: #22c55e;"></span>
-                            <span style="background: #facc15;"></span>
-                            <span style="background: #ef4444;"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-ember-arena')">
-                    <div class="theme-preview theme-ember-arena-preview">
-                        <div class="theme-name">Ember Arena</div>
-                        <div class="theme-colors">
-                            <span style="background: #f97316;"></span>
-                            <span style="background: #22c55e;"></span>
-                            <span style="background: #fb923c;"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-minimal-light')">
-                    <div class="theme-preview theme-minimal-light-preview">
-                        <div class="theme-name">Minimal Light</div>
-                        <div class="theme-colors">
-                            <span style="background: #2563eb;"></span>
-                            <span style="background: #16a34a;"></span>
-                            <span style="background: #dc2626;"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-secondary" onclick="closeThemePicker()">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Create Counter Modal -->
-    <div class="modal-overlay" id="createCounterModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2 class="modal-title">Create New Counter</h2>
-                <p class="modal-subtitle">Set up your game tracking with a target goal</p>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="gameName">Game Name</label>
-                <input type="text" id="gameName" class="form-input" placeholder="e.g., League of Legends, Valorant">
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="targetMatches">Target Matches</label>
-                <input type="number" id="targetMatches" class="form-input" placeholder="e.g., 100" min="1" value="100">
-            </div>
-            
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-secondary" onclick="closeCreateModal()">Cancel</button>
-                <button class="modal-btn modal-btn-primary" onclick="createCounterFromModal()">Create Counter</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Win Rate Counter v2 - Enhanced for Grinders
-        const WinRateCounter = {
-            // Data
-            counters: [],
-            selectedCounterId: null,
-            matches: [],
-            sessions: [],
-            settings: {
-                keyboardShortcuts: true,
-                sessionInactivity: 45,
-                trendWindow: 10,
-                animations: true,
-                celebrations: true
-            },
-            
-            // Initialize
-            init() {
-                this.loadFromStorage();
-                this.loadThemeFromStorage();
-                this.initChessBackground();
-                this.initFloatingParticles();
-                this.setupKeyboardShortcuts();
-                this.render();
-                
-                if (this.counters.length > 0) {
-                    this.selectCounter(this.counters[0].id);
-                }
-            },
-            
-            // Floating Particles
-            initFloatingParticles() {
-                if (!this.settings.animations) return;
-                
-                const container = document.getElementById('floatingParticles');
-                const particleCount = 20;
-                
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    
-                    // Random positioning
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.top = Math.random() * 100 + '%';
-                    
-                    // Random animation delay
-                    particle.style.animationDelay = Math.random() * 20 + 's';
-                    particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                    
-                    // Random size
-                    const size = 1 + Math.random() * 3;
-                    particle.style.width = size + 'px';
-                    particle.style.height = size + 'px';
-                    
-                    container.appendChild(particle);
-                }
-            },
-            
-            // Theme Management
-            loadThemeFromStorage() {
-                const savedTheme = localStorage.getItem('winrate-counter-theme');
-                if (savedTheme) {
-                    this.setTheme(savedTheme, false);
-                }
-            },
-            
-            setTheme(themeName, save = true) {
-                // Remove all theme classes
-                document.body.className = document.body.className.replace(/theme-\S+/g, '');
-                
-                // Add the new theme class
-                document.body.classList.add(themeName);
-                
-                // Save to localStorage
-                if (save) {
-                    localStorage.setItem('winrate-counter-theme', themeName);
-                }
-            },
-            
-            // Storage
-            loadFromStorage() {
-                const data = localStorage.getItem('winrate-counter-v2');
-                if (data) {
-                    const parsed = JSON.parse(data);
-                    this.counters = parsed.counters || [];
-                    this.matches = parsed.matches || [];
-                    this.sessions = parsed.sessions || [];
-                    this.settings = { ...this.settings, ...parsed.settings };
-                } else {
-                    // Migrate old data
-                    const oldCounters = localStorage.getItem('winrate-counters');
-                    const oldHistory = localStorage.getItem('winrate-history');
-                    if (oldCounters) {
-                        this.counters = JSON.parse(oldCounters);
-                        this.counters.forEach(counter => {
-                            counter.targetMatches = counter.targetMatches || null;
-                            counter.quickTags = counter.quickTags || [];
-                            counter.settings = {
-                                lossStreakWarning: true,
-                                lossStreakThreshold: 3,
-                                analytics: true,
-                                sessions: true
-                            };
-                        });
-                    }
-                    if (oldHistory) {
-                        const history = JSON.parse(oldHistory);
-                        this.matches = history.map(item => ({
-                            id: Date.now().toString() + Math.random(),
-                            counterId: item.counterId,
-                            result: item.type,
-                            tag: null,
-                            note: '',
-                            timestamp: item.timestamp,
-                            sessionId: this.getCurrentSessionId()
-                        }));
-                    }
-                }
-            },
-            
-            saveToStorage() {
-                const data = {
-                    counters: this.counters,
-                    matches: this.matches,
-                    sessions: this.sessions,
-                    settings: this.settings,
-                    version: '2.0'
-                };
-                localStorage.setItem('winrate-counter-v2', JSON.stringify(data));
-            },
-            
-            // Chess Background
-            initChessBackground() {
-                if (!this.settings.animations) return;
-                
-                const background = document.getElementById('chessBackground');
-                const pieces = {
-                    black: ['♔', '♕', '♖', '♗', '♘', '♙'],
-                    white: ['♚', '♛', '♜', '♝', '♞', '♟'],
-                    special: ['⚔', '⚕', '⚖', '⚗', '⚘']
-                };
-                
-                // Create 15 chess pieces with different colors and sizes
-                for (let i = 0; i < 15; i++) {
-                    const piece = document.createElement('div');
-                    
-                    // Randomly choose piece set and type
-                    const colorSet = Math.random() < 0.4 ? 'black' : Math.random() < 0.7 ? 'white' : 'special';
-                    const pieceSet = pieces[colorSet];
-                    const pieceType = pieceSet[Math.floor(Math.random() * pieceSet.length)];
-                    
-                    piece.className = `chess-piece ${colorSet}`;
-                    piece.textContent = pieceType;
-                    
-                    // Random positioning
-                    piece.style.left = Math.random() * 100 + '%';
-                    piece.style.top = Math.random() * 100 + '%';
-                    
-                    // Random size variation
-                    const size = 20 + Math.random() * 15;
-                    piece.style.fontSize = size + 'px';
-                    
-                    // Random animation timing
-                    piece.style.animationDelay = Math.random() * 30 + 's';
-                    piece.style.animationDuration = (20 + Math.random() * 15) + 's';
-                    
-                    // Add secondary animation for some pieces
-                    if (Math.random() < 0.3) {
-                        piece.style.animation += `, drift ${10 + Math.random() * 10}s infinite ease-in-out`;
-                    }
-                    
-                    background.appendChild(piece);
-                }
-            },
-            
-            // Keyboard Shortcuts
-            setupKeyboardShortcuts() {
-                if (!this.settings.keyboardShortcuts) return;
-                
-                document.addEventListener('keydown', (e) => {
-                    // Ignore if typing in input
-                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-                    
-                    switch(e.key.toLowerCase()) {
-                        case 'w':
-                            e.preventDefault();
-                            this.addWin();
-                            break;
-                        case 'l':
-                            e.preventDefault();
-                            this.addLoss();
-                            break;
-                        case 'z':
-                            e.preventDefault();
-                            this.undoLastAction();
-                            break;
-                    }
-                });
-            },
-            
-            // Counter Management
-            createCounter(title, targetMatches = null, quickTags = []) {
-                const counter = {
-                    id: Date.now().toString(),
-                    title,
-                    wins: 0,
-                    losses: 0,
-                    targetMatches,
-                    quickTags,
-                    settings: {
-                        lossStreakWarning: true,
-                        lossStreakThreshold: 3,
-                        analytics: true,
-                        sessions: true
-                    },
-                    createdAt: new Date().toISOString()
-                };
-                
-                this.counters.push(counter);
-                this.saveToStorage();
-                this.render();
-                this.selectCounter(counter.id);
-                
-                if (this.settings.celebrations) {
-                    this.showCelebration('🎯');
-                }
-            },
-            
-            deleteCounter(counterId) {
-                if (!confirm('Are you sure you want to delete this counter?')) return;
-                
-                this.counters = this.counters.filter(c => c.id !== counterId);
-                this.matches = this.matches.filter(m => m.counterId !== counterId);
-                
-                if (this.selectedCounterId === counterId) {
-                    this.selectedCounterId = null;
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            selectCounter(counterId) {
-                this.selectedCounterId = counterId;
-                this.render();
-            },
-            
-            updateCounterTitle(counterId, title) {
-                const counter = this.counters.find(c => c.id === counterId);
-                if (counter) {
-                    counter.title = title;
-                    this.saveToStorage();
-                    this.renderCountersList();
-                }
-            },
-            
-            resetCounter() {
-                if (!confirm('Are you sure you want to reset this counter? This will clear all wins and losses.')) return;
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    counter.wins = 0;
-                    counter.losses = 0;
-                    this.matches = this.matches.filter(m => m.counterId !== counter.id);
-                    this.saveToStorage();
-                    this.render();
-                }
-            },
-            
-            // Match Tracking
-            addWin(tag = null, note = '') {
-                if (!this.selectedCounterId) return;
-                
-                const match = {
-                    id: Date.now().toString(),
-                    counterId: this.selectedCounterId,
-                    result: 'win',
-                    tag,
-                    note,
-                    timestamp: new Date().toISOString(),
-                    sessionId: this.getCurrentSessionId()
-                };
-                
-                this.matches.push(match);
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    counter.wins++;
-                    this.checkCelebrations(counter);
-                    this.checkLossStreak(counter);
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            addLoss(tag = null, note = '') {
-                if (!this.selectedCounterId) return;
-                
-                const match = {
-                    id: Date.now().toString(),
-                    counterId: this.selectedCounterId,
-                    result: 'loss',
-                    tag,
-                    note,
-                    timestamp: new Date().toISOString(),
-                    sessionId: this.getCurrentSessionId()
-                };
-                
-                this.matches.push(match);
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    counter.losses++;
-                    this.checkLossStreak(counter);
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            undoLastAction() {
-                const counterMatches = this.matches.filter(m => m.counterId === this.selectedCounterId);
-                if (counterMatches.length === 0) return;
-                
-                const lastMatch = counterMatches[counterMatches.length - 1];
-                this.matches = this.matches.filter(m => m.id !== lastMatch.id);
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    if (lastMatch.result === 'win') {
-                        counter.wins--;
-                    } else {
-                        counter.losses--;
-                    }
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            // Session Management
-            getCurrentSessionId() {
-                const now = Date.now();
-                const inactivityMs = this.settings.sessionInactivity * 60 * 1000;
-                
-                // Find current or create new session
-                let currentSession = this.sessions.find(s => {
-                    const lastActivity = new Date(s.lastActivity).getTime();
-                    return (now - lastActivity) < inactivityMs;
-                });
-                
-                if (!currentSession) {
-                    currentSession = {
-                        id: Date.now().toString(),
-                        startTime: new Date().toISOString(),
-                        lastActivity: new Date().toISOString(),
-                        wins: 0,
-                        losses: 0
-                    };
-                    this.sessions.push(currentSession);
-                } else {
-                    currentSession.lastActivity = new Date().toISOString();
-                }
-                
-                return currentSession.id;
-            },
-            
-            // Analytics
-            calculateWinRate(wins, losses) {
-                const total = wins + losses;
-                if (total === 0) return 0;
-                return ((wins / total) * 100).toFixed(1);
-            },
-            
-            calculateTrend(counterId) {
-                const counterMatches = this.matches.filter(m => m.counterId === counterId);
-                const windowSize = this.settings.trendWindow;
-                
-                if (counterMatches.length < windowSize * 2) return 'stable';
-                
-                const recent = counterMatches.slice(-windowSize);
-                const previous = counterMatches.slice(-windowSize * 2, -windowSize);
-                
-                const recentWinRate = this.calculateWinRate(
-                    recent.filter(m => m.result === 'win').length,
-                    recent.filter(m => m.result === 'loss').length
-                );
-                
-                const previousWinRate = this.calculateWinRate(
-                    previous.filter(m => m.result === 'win').length,
-                    previous.filter(m => m.result === 'loss').length
-                );
-                
-                const diff = parseFloat(recentWinRate) - parseFloat(previousWinRate);
-                
-                if (diff > 5) return 'up';
-                if (diff < -5) return 'down';
-                return 'stable';
-            },
-            
-            getCurrentStreak(counterId) {
-                const counterMatches = this.matches.filter(m => m.counterId === counterId);
-                if (counterMatches.length === 0) return { type: 'none', length: 0 };
-                
-                let streak = 0;
-                let streakType = counterMatches[counterMatches.length - 1].result;
-                
-                for (let i = counterMatches.length - 1; i >= 0; i--) {
-                    if (counterMatches[i].result === streakType) {
-                        streak++;
-                    } else {
-                        break;
-                    }
-                }
-                
-                return { type: streakType, length: streak };
-            },
-            
-            // Celebrations
-            checkCelebrations(counter) {
-                const total = counter.wins + counter.losses;
-                
-                // Target goal reached
-                if (counter.targetMatches && total >= counter.targetMatches) {
-                    this.showCelebration('🎯 Goal Reached!');
-                }
-                
-                // Win streak milestones - ADD CONFETTI
-                const streak = this.getCurrentStreak(counter.id);
-                if (streak.type === 'win' && [3, 5, 10, 15].includes(streak.length)) {
-                    this.showCelebration(`🔥 ${streak.length} Win Streak!`);
-                    this.createConfetti();
-                }
-            },
-            
-            checkLossStreak(counter) {
-                if (!counter.settings.lossStreakWarning) return;
-                
-                const streak = this.getCurrentStreak(counter.id);
-                if (streak.type === 'loss' && streak.length >= counter.settings.lossStreakThreshold) {
-                    this.showStreakWarning(streak.length);
-                }
-            },
-            
-            showCelebration(text) {
-                if (!this.settings.celebrations) return;
-                
-                const celebration = document.createElement('div');
-                celebration.className = 'celebration';
-                celebration.textContent = text;
-                celebration.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 48px;
-                    font-weight: 700;
-                    color: var(--accent-green);
-                    text-shadow: 0 0 20px var(--accent-green);
-                    z-index: 2000;
-                    animation: celebrate 3s ease-out forwards;
-                    pointer-events: none;
-                `;
-                
-                document.body.appendChild(celebration);
-                
-                setTimeout(() => {
-                    document.body.removeChild(celebration);
-                }, 3000);
-            },
-            
-            showStreakWarning(length) {
-                // Create and show warning message
-                const warning = document.createElement('div');
-                warning.className = 'streak-warning';
-                warning.innerHTML = `
-                    <div class="streak-warning-text">
-                        🎮 You're on a ${length}-loss streak! 🎯 Time for a strategic break? 
-                        <br>Come back stronger and refreshed! ☕
-                    </div>
-                    <button class="streak-warning-close" onclick="this.parentElement.remove()">×</button>
-                `;
-                
-                // Add styles for the warning
-                warning.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: var(--gradient-red);
-                    color: white;
-                    padding: 16px 20px;
-                    border-radius: 12px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    z-index: 3000;
-                    animation: slideIn 0.5s ease;
-                    max-width: 320px;
-                    box-shadow: var(--shadow-lg);
-                    backdrop-filter: blur(10px);
-                `;
-                
-                document.body.appendChild(warning);
-                
-                // Auto-remove after 2 seconds
-                setTimeout(() => {
-                    if (warning.parentElement) {
-                        warning.remove();
-                    }
-                }, 2000);
-            },
-            
-            createConfetti() {
-                const colors = ['#10b981', '#f59e0b', '#06b6d4', '#8b5cf6', '#ec4899'];
-                const confettiCount = 30;
-                
-                for (let i = 0; i < confettiCount; i++) {
-                    const confetti = document.createElement('div');
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const size = Math.random() * 6 + 4;
-                    const startX = Math.random() * window.innerWidth;
-                    const startY = Math.random() * 200 + 100;
-                    
-                    confetti.style.cssText = `
-                        position: fixed;
-                        left: ${startX}px;
-                        top: ${startY}px;
-                        width: ${size}px;
-                        height: ${size}px;
-                        background: ${color};
-                        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-                        z-index: 9999;
-                        pointer-events: none;
-                        animation: confettiFall ${1.5 + Math.random() * 1.5}s linear forwards;
-                    `;
-                    
-                    document.body.appendChild(confetti);
-                    
-                    // Remove confetti after animation
-                    setTimeout(() => {
-                        confetti.remove();
-                    }, 3000);
-                }
-            },
-            
-            // Rendering
-            render() {
-                this.renderCountersList();
-                this.renderCounterDetails();
-            },
-            
-            renderCountersList() {
-                const container = document.getElementById('countersList');
-                
-                if (this.counters.length === 0) {
-                    container.innerHTML = `
-                        <div style="text-align: center; color: var(--text-secondary); padding: 32px;">
-                            <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;">🎮</div>
-                            <p>No counters yet</p>
-                            <p style="font-size: 12px; margin-top: 8px;">Create your first counter to start tracking</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                container.innerHTML = this.counters.map(counter => {
-                    const winRate = this.calculateWinRate(counter.wins, counter.losses);
-                    const trend = this.calculateTrend(counter.id);
-                    const isActive = counter.id === this.selectedCounterId;
-                    const trendIcon = trend === 'up' ? '▲' : trend === 'down' ? '▼' : '▬';
-                    
-                    return `
-                        <div class="counter-item ${isActive ? 'active' : ''}" onclick="WinRateCounter.selectCounter('${counter.id}')">
-                            <div class="counter-item-header">
-                                <div class="counter-title">${counter.title}</div>
-                                <div style="display: flex; align-items: center; gap: 4px;">
-                                    <span class="trend-indicator trend-${trend}">${trendIcon}</span>
-                                    <div class="win-rate-pill">${winRate}%</div>
-                                </div>
-                            </div>
-                            <div class="counter-stats">
-                                <div class="stat-item stat-wins">
-                                    <span>W:</span>
-                                    <span>${counter.wins}</span>
-                                </div>
-                                <div class="stat-item stat-losses">
-                                    <span>L:</span>
-                                    <span>${counter.losses}</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span>Total:</span>
-                                    <span>${counter.wins + counter.losses}</span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            },
-            
-            renderCounterDetails() {
-                const container = document.getElementById('counterDetails');
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                
-                if (!counter) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-icon">📊</div>
-                            <h2 class="empty-title">No Counter Selected</h2>
-                            <p class="empty-text">Select a counter from the left or create a new one to start tracking your win rate</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                const winRate = this.calculateWinRate(counter.wins, counter.losses);
-                const total = counter.wins + counter.losses;
-                const streak = this.getCurrentStreak(counter.id);
-                
-                container.innerHTML = `
-                    <div class="counter-detail-header">
-                        <input type="text" 
-                               class="detail-title-input" 
-                               value="${counter.title}" 
-                               onchange="WinRateCounter.updateCounterTitle('${counter.id}', this.value)"
-                               placeholder="Enter counter title...">
-                    </div>
-                    
-                    ${counter.targetMatches ? `
-                        <div class="progress-section">
-                            <div class="progress-header">
-                                <div class="progress-title">Match Progress</div>
-                                <div class="progress-text">${total} / ${counter.targetMatches} matches</div>
-                            </div>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar-fill ${total < counter.targetMatches * 0.33 ? 'low' : total < counter.targetMatches * 0.66 ? 'medium' : 'high'}" 
-                                     style="width: ${Math.min((total / counter.targetMatches) * 100, 100)}%">
-                                    <div class="progress-percentage">${Math.round(Math.min((total / counter.targetMatches) * 100, 100))}%</div>
-                                </div>
-                            </div>
-                        </div>
-                    ` : ''}
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-label">Wins</div>
-                            <div class="stat-value wins">${counter.wins}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Losses</div>
-                            <div class="stat-value losses">${counter.losses}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Total Games</div>
-                            <div class="stat-value total">${total}</div>
-                        </div>
-                        <div class="stat-card win-rate">
-                            <div class="stat-label">Win Rate</div>
-                            <div class="stat-value winrate">${winRate}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-win" onclick="WinRateCounter.addWin()">
-                            <span>🏆</span>
-                            <span>Win</span>
-                            <span class="keyboard-hint">W</span>
-                        </button>
-                        <button class="btn btn-loss" onclick="WinRateCounter.addLoss()">
-                            <span>💀</span>
-                            <span>Loss</span>
-                            <span class="keyboard-hint">L</span>
-                        </button>
-                    </div>
-                    
-                    <div class="secondary-actions">
-                        <button class="btn-secondary" onclick="WinRateCounter.undoLastAction()">
-                            <span>↩️</span>
-                            <span>Undo Last</span>
-                            <span class="keyboard-hint">Z</span>
-                        </button>
-                        <button class="btn-secondary" onclick="WinRateCounter.resetCounter()">
-                            <span>🔄</span>
-                            <span>Reset</span>
-                        </button>
-                        <button class="btn-secondary btn-danger" onclick="WinRateCounter.deleteCounter('${counter.id}')">
-                            <span>🗑️</span>
-                            <span>Delete</span>
-                        </button>
-                    </div>
-                `;
-            }
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
-        
-        // Theme Picker Functions
-        function showThemePicker() {
-            document.getElementById('themePickerModal').classList.add('active');
-        }
 
-        function closeThemePicker() {
-            document.getElementById('themePickerModal').classList.remove('active');
-        }
-
-        function setTheme(themeName) {
-            WinRateCounter.setTheme(themeName);
-            closeThemePicker();
-        }
-        
-        // Modal Functions
-        function addNewCounter() {
-            showCreateModal();
-        }
-
-        function showCreateModal() {
-            document.getElementById('createCounterModal').classList.add('active');
-            document.getElementById('gameName').focus();
-        }
-
-        function closeCreateModal() {
-            document.getElementById('createCounterModal').classList.remove('active');
-            document.getElementById('gameName').value = '';
-            document.getElementById('targetMatches').value = '';
-        }
-        
-        function createCounterFromModal() {
-            const gameName = document.getElementById('gameName').value.trim();
-            const targetMatches = parseInt(document.getElementById('targetMatches').value) || null;
-            
-            if (!gameName) {
-                alert('Please enter a game name');
-                return;
-            }
-            
-            WinRateCounter.createCounter(gameName, targetMatches);
-            closeCreateModal();
-        }
-        
-        // Footer Functions
-        function copyWalletAddress() {
-            const address = '0xAadb63A5bbcd64A1f8a9cbAF51CBDFd514254056';
-            navigator.clipboard.writeText(address).then(() => {
-                const btn = document.getElementById('copyBtn');
-                const originalText = btn.textContent;
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
             });
-        }
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', () => {
-            WinRateCounter.init();
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.step, .feature-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
     </script>
 </body>
