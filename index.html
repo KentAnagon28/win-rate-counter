@@ -13,7 +13,16 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="nav-brand">Anichess Companion</a>
+            <a href="#" class="nav-brand">
+                <img src="assets/icon-logo.png" alt="Anichess Companion Logo" class="nav-logo">
+                Anichess Companion
+            </a>
+            <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="empty"></div>
             <div class="nav-menu">
                 <a href="/tracker/" class="nav-link">Tracker</a>
                 <a href="#" class="nav-link disabled" data-tooltip="Coming soon">Leaderboard</a>
@@ -28,19 +37,47 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" style="background-image: url('assets/hero-bg.png');">
         <div class="hero-content fade-in-up">
-            <h1 class="hero-title">Track Your Anichess Performance</h1>
-            <p class="hero-subtitle">Track wins, analyze performance, climb rankings in Checkmate Arena.</p>
-            <div class="hero-cta">
-                <a href="#" class="btn-primary">
-                    <span>📥</span>
-                    <span>Download Chrome Extension</span>
-                </a>
-                <a href="/tracker/" class="btn-secondary">
-                    <span>📊</span>
-                    <span>Open Tracker</span>
-                </a>
+            <div class="hero-text">
+                <h1 class="hero-title">Track Your Anichess Performance</h1>
+                <p class="hero-subtitle">Track wins, analyze performance, climb rankings in Anichess.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn-primary">
+                        <span>📥</span>
+                        <span>Download Chrome Extension</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-mockup">
+                <div class="carousel-container">
+                    <button class="carousel-arrow carousel-arrow-left" onclick="changeSlide(-1)">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+                        <div class="carousel-slide active">
+                            <img src="assets/product-mockup.png" alt="Anichess Companion Phone Mockup" class="mockup-image" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="assets/product-mockup-tablet.png" alt="Anichess Companion Tablet Mockup" class="mockup-image" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="assets/product-mockup-laptop.png" alt="Anichess Companion Laptop Mockup" class="mockup-image" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="assets/product-mockup-computer.png" alt="Anichess Companion Computer Mockup" class="mockup-image" loading="lazy">
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" onclick="changeSlide(1)">
+                        <span>›</span>
+                    </button>
+                </div>
+                <div class="carousel-indicators">
+                    <button class="indicator active" onclick="goToSlide(0)"></button>
+                    <button class="indicator" onclick="goToSlide(1)"></button>
+                    <button class="indicator" onclick="goToSlide(2)"></button>
+                    <button class="indicator" onclick="goToSlide(3)"></button>
+                </div>
             </div>
         </div>
     </section>
@@ -53,21 +90,27 @@
             
             <div class="steps">
                 <div class="step fade-in-up">
-                    <div class="step-number">1</div>
+                    <div class="step-header">
+                        <img src="assets/icon-install.png" alt="Install Extension" class="step-icon" loading="lazy">
+                    </div>
                     <h3 class="step-title">Install Extension</h3>
                     <p class="step-description">Add the Chrome extension to your browser. It's lightweight and only activates during Anichess matches.</p>
                 </div>
                 
                 <div class="step fade-in-up">
-                    <div class="step-number">2</div>
+                    <div class="step-header">
+                        <img src="assets/icon-track.png" alt="Track Performance" class="step-icon" loading="lazy">
+                    </div>
                     <h3 class="step-title">Track Performance</h3>
                     <p class="step-description">Manually record wins and losses during Checkmate Arena matches with a single click.</p>
                 </div>
                 
                 <div class="step fade-in-up">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">View Insights</h3>
-                    <p class="step-description">Access detailed stats, rankings, and performance trends on the website.</p>
+                    <div class="step-header">
+                        <img src="assets/icon-insights.png" alt="Get Insights" class="step-icon" loading="lazy">
+                    </div>
+                    <h3 class="step-title">Get Insights</h3>
+                    <p class="step-description">View detailed statistics, win rates, and performance trends to improve your game.</p>
                 </div>
             </div>
         </div>
@@ -80,37 +123,37 @@
         
         <div class="features">
             <div class="feature-card fade-in-up">
-                <div class="feature-icon">📈</div>
+                <img src="assets/icon-performance.png" alt="Performance Tracking" class="feature-icon" loading="lazy">
                 <h3 class="feature-title">Performance Tracking</h3>
                 <p class="feature-description">Track daily and monthly performance metrics. Monitor win rates, streaks, and progress over time.</p>
             </div>
             
             <div class="feature-card fade-in-up">
-                <div class="feature-icon">🏆</div>
+                <img src="assets/icon-leaderboard.png" alt="Arena Leaderboards" class="feature-icon" loading="lazy">
                 <h3 class="feature-title">Arena Leaderboards</h3>
                 <p class="feature-description">Compete on Checkmate Arena-specific leaderboards. See how you rank against other dedicated players.</p>
             </div>
             
             <div class="feature-card fade-in-up">
-                <div class="feature-icon">👤</div>
+                <img src="assets/icon-profiles.png" alt="Player Profiles" class="feature-icon" loading="lazy">
                 <h3 class="feature-title">Player Profiles</h3>
                 <p class="feature-description">Create a profile linked to your Anichess account. Showcase your achievements and track your journey.</p>
             </div>
             
             <div class="feature-card fade-in-up">
-                <div class="feature-icon">🎯</div>
+                <img src="assets/icon-focus.png" alt="Focused Tracking" class="feature-icon" loading="lazy">
                 <h3 class="feature-title">Focused Tracking</h3>
                 <p class="feature-description">Designed specifically for Checkmate Arena. No unnecessary features - just what serious players need.</p>
             </div>
             
             <div class="feature-card fade-in-up">
-                <div class="feature-icon">⚡</div>
+                <img src="assets/icon-lightweight.png" alt="Lightweight Extension" class="feature-icon" loading="lazy">
                 <h3 class="feature-title">Lightweight Extension</h3>
                 <p class="feature-description">Minimal impact on browser performance. Only activates when you're playing Anichess.</p>
             </div>
             
             <div class="feature-card fade-in-up">
-                <div class="feature-icon">🔒</div>
+                <img src="assets/icon-privacy.png" alt="Privacy First" class="feature-icon" loading="lazy">
                 <h3 class="feature-title">Privacy First</h3>
                 <p class="feature-description">Your data belongs to you. No tracking beyond what's necessary for the service to function.</p>
             </div>
