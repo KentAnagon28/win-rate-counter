@@ -9,22 +9,113 @@
    ======================================== */
 
 // ========================================
-// ANTI-COPY DETERRENT SCRIPTS
+// MOBILE MENU FUNCTIONALITY
 // ========================================
-// 
-// IMPORTANT: These are only deterrence measures and cannot fully prevent copying.
-// Determined users can still access source code through browser developer tools,
-// network inspection, or by disabling JavaScript.
-// 
-// These measures add friction to discourage casual copying and unauthorized use.
-// They can be easily removed if needed in the future.
+function toggleMobileMenu() {
+    console.log('Toggle mobile menu clicked');
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    console.log('Hamburger:', hamburger);
+    console.log('Nav menu:', navMenu);
+    
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    
+    console.log('Menu active state:', navMenu.classList.contains('active'));
+    
+    // Close menu when clicking outside
+    if (navMenu.classList.contains('active')) {
+        setTimeout(() => {
+            document.addEventListener('click', closeMenuOutside);
+        }, 100);
+    } else {
+        document.removeEventListener('click', closeMenuOutside);
+    }
+}
+
+function closeMenuOutside(event) {
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.removeEventListener('click', closeMenuOutside);
+    }
+}
+
 // ========================================
+// DEVICE CAROUSEL FUNCTIONALITY
+// ========================================
+let currentSlide = 0;
+const totalSlides = 4;
+let autoScrollInterval;
+
+function initCarousel() {
+    // Start auto-scroll
+    startAutoScroll();
+    
+    // Pause auto-scroll on hover
+    const carousel = document.querySelector('.carousel-container');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoScroll);
+        carousel.addEventListener('mouseleave', startAutoScroll);
+    }
+}
+
+function updateCarousel() {
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    if (!track || slides.length === 0) return;
+    
+    // Update track position
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    // Update active states
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+    });
+    
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+    });
+}
+
+function changeSlide(direction) {
+    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+    updateCarousel();
+    resetAutoScroll();
+}
+
+function goToSlide(slideIndex) {
+    currentSlide = slideIndex;
+    updateCarousel();
+    resetAutoScroll();
+}
+
+function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+        changeSlide(1);
+    }, 3000);
+}
+
+function stopAutoScroll() {
+    clearInterval(autoScrollInterval);
+}
+
+function resetAutoScroll() {
+    stopAutoScroll();
+    startAutoScroll();
+}
 
 // Chess Background Animation
 function initChessBackground() {
     const chessBackground = document.getElementById('chessBackground');
     const pieces = ['♔', '♕', '♖', '♗', '♘', '♙', '♚', '♛', '♜', '♝', '♞', '♟'];
-    const pieceCount = 15;
+    const pieceCount = 25; // Increased from 15 to 25 pieces
     
     for (let i = 0; i < pieceCount; i++) {
         const piece = document.createElement('div');
@@ -40,8 +131,11 @@ function initChessBackground() {
         piece.style.animationDuration = (15 + Math.random() * 10) + 's';
         
         // Random size
-        const size = 15 + Math.random() * 25;
-        piece.style.fontSize = size + 'px';
+        const size = 12 + Math.random() * 20; // Slightly smaller pieces
+        piece.classList.add(`size-${Math.floor(size / 5)}`);
+        
+        // Enhanced glow effect
+        piece.classList.add(`glow-${Math.floor(Math.random() * 3)}`);
         
         chessBackground.appendChild(piece);
     }
@@ -164,6 +258,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initChessBackground();
+    initCarousel();
     
     // Add fade-in-up class to hero content immediately
     const heroContent = document.querySelector('.hero-content');
