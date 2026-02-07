@@ -46,6 +46,102 @@ function closeMenuOutside(event) {
 }
 
 // ========================================
+// THEME SELECTION
+// ========================================
+function getThemeStorage() {
+    try {
+        const testKey = '__theme_test__';
+        localStorage.setItem(testKey, '1');
+        localStorage.removeItem(testKey);
+        return localStorage;
+    } catch (err) {
+        console.warn('localStorage unavailable; theme will not persist.', err);
+        return null;
+    }
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const selectors = document.querySelectorAll('[data-theme-select]');
+    selectors.forEach(select => {
+        if (select.value !== theme) {
+            select.value = theme;
+        }
+    });
+}
+
+function initThemeSelector() {
+    const selectors = document.querySelectorAll('[data-theme-select]');
+    if (selectors.length === 0) return;
+
+    const storage = getThemeStorage();
+    const storedTheme = storage ? storage.getItem('anichessTheme') : null;
+    const initialTheme = storedTheme || document.documentElement.getAttribute('data-theme') || 'theme-1';
+    applyTheme(initialTheme);
+
+    selectors.forEach(select => {
+        select.addEventListener('change', (event) => {
+            const theme = event.target.value;
+            applyTheme(theme);
+            if (storage) {
+                storage.setItem('anichessTheme', theme);
+            }
+        });
+    });
+}
+
+// ========================================
+// HERO SCROLL HINT
+// ========================================
+function initScrollHint() {
+    const hint = document.querySelector('.scroll-hint');
+    const hero = document.querySelector('.hero');
+    if (!hint || !hero) return;
+
+    hint.addEventListener('click', () => {
+        const targetSelector = hint.getAttribute('data-scroll-target');
+        const target = targetSelector ? document.querySelector(targetSelector) : null;
+        if (target) {
+            smoothScrollTo(target, 1200);
+        }
+    });
+
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            hint.classList.toggle('hidden', !entry.isIntersecting);
+        },
+        { threshold: 0.4 }
+    );
+
+    observer.observe(hero);
+}
+
+function smoothScrollTo(target, durationMs) {
+    const startY = window.pageYOffset;
+    const targetRect = target.getBoundingClientRect();
+    const targetY = startY + targetRect.top;
+    const startTime = performance.now();
+
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / durationMs, 1);
+        const eased = easeInOutCubic(progress);
+        const nextY = startY + (targetY - startY) * eased;
+        window.scrollTo(0, nextY);
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
+}
+
+// ========================================
 // DEVICE CAROUSEL FUNCTIONALITY
 // ========================================
 let currentSlide = 0;
@@ -247,7 +343,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            smoothScrollTo(target, 1200);
         }
     });
 });
@@ -257,6 +353,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ========================================
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    initThemeSelector();
+    initScrollHint();
     initChessBackground();
     initCarousel();
     
