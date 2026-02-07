@@ -1,1252 +1,552 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="theme-1">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Win Rate Counter - Track Your Gaming Performance</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Anichess Tracker - Track Your Performance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
     <style>
-        :root {
-            /* Default Theme: Anichess Dark */
-            --bg-main: #0a0a0f;
-            --bg-panel: #141421;
-            --bg-card: #1a1a2e;
-
-            --text-primary: #e5e7eb;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
-
-            --accent: #3b82f6;
-            --accent-soft: rgba(59,130,246,0.15);
-
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-
-            --border-soft: rgba(255,255,255,0.08);
-            --shadow-soft: rgba(0,0,0,0.4);
-
-            /* Typography variables */
-            --font-weight-primary: 700;
-            --font-weight-secondary: 500;
-            --font-weight-muted: 400;
-            --letter-spacing-tight: -0.02em;
-            --letter-spacing-normal: 0;
-            --letter-spacing-wide: 0.05em;
-            
-            /* Font Family */
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        /* Theme Presets with Unique Designs */
-        .theme-anichess-dark {
-            --bg-main: #0a0a0f;
-            --bg-panel: #141421;
-            --bg-card: #1a1a2e;
-
-            --text-primary: #e5e7eb;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
-
-            --accent: #3b82f6;
-            --accent-soft: rgba(59,130,246,0.15);
-
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-
-            --border-soft: rgba(255,255,255,0.08);
-            --shadow-soft: rgba(0,0,0,0.4);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-anichess-void {
-            --bg-main: #050508;
-            --bg-panel: #0d0d14;
-            --bg-card: #141424;
-
-            --text-primary: #e6e6f0;
-            --text-secondary: #a1a1b8;
-            --text-muted: #6b6b80;
-
-            --accent: #8b5cf6;
-            --accent-soft: rgba(139,92,246,0.15);
-
-            --success: #22c55e;
-            --danger: #f43f5e;
-            --warning: #fbbf24;
-
-            --border-soft: rgba(255,255,255,0.06);
-            --shadow-soft: rgba(0,0,0,0.5);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-matrix-grind {
-            --bg-main: #050505;
-            --bg-panel: #0b0f0b;
-            --bg-card: #111811;
-
-            --text-primary: #d1fae5;
-            --text-secondary: #86efac;
-            --text-muted: #4ade80;
-
-            --accent: #22c55e;
-            --accent-soft: rgba(34,197,94,0.15);
-
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #facc15;
-
-            --border-soft: rgba(34,197,94,0.12);
-            --shadow-soft: rgba(0,0,0,0.6);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-ember-arena {
-            --bg-main: #0c0a09;
-            --bg-panel: #1c120c;
-            --bg-card: #26170f;
-
-            --text-primary: #fff7ed;
-            --text-secondary: #fed7aa;
-            --text-muted: #fdba74;
-
-            --accent: #f97316;
-            --accent-soft: rgba(249,115,22,0.18);
-
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #fb923c;
-
-            --border-soft: rgba(249,115,22,0.15);
-            --shadow-soft: rgba(0,0,0,0.55);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        .theme-minimal-light {
-            --bg-main: #f8fafc;
-            --bg-panel: #f1f5f9;
-            --bg-card: #ffffff;
-
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-
-            --accent: #2563eb;
-            --accent-soft: rgba(37,99,235,0.15);
-
-            --success: #16a34a;
-            --danger: #dc2626;
-            --warning: #d97706;
-
-            --border-soft: rgba(15,23,42,0.1);
-            --shadow-soft: rgba(15,23,42,0.12);
-
-            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-        }
-
-        /* Enhanced Minimal Light Theme Visibility */
-        .theme-minimal-light body {
-            color: #0f172a;
-            font-weight: 500;
-        }
-
-        .theme-minimal-light .panel-title {
-            color: #0f172a;
-            text-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
-        }
-
-        .theme-minimal-light .stat-label {
-            color: #334155;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .stat-value {
-            color: #0f172a;
-            font-weight: 700;
-        }
-
-        .theme-minimal-light .stat-value.wins { 
-            color: #16a34a;
-            text-shadow: 0 0 15px rgba(22, 163, 74, 0.2);
-        }
-
-        .theme-minimal-light .stat-value.losses { 
-            color: #dc2626;
-            text-shadow: 0 0 15px rgba(220, 38, 38, 0.2);
-        }
-
-        .theme-minimal-light .stat-value.total { 
-            color: #0f172a;
-            text-shadow: 0 0 10px rgba(15, 23, 42, 0.1);
-        }
-
-        .theme-minimal-light .stat-value.winrate {
-            color: #2563eb;
-            text-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
-            font-weight: 800;
-        }
-
-        .theme-minimal-light .counter-title {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .counter-stats {
-            color: #334155;
-            font-weight: 500;
-        }
-
-        .theme-minimal-light .form-input {
-            color: #0f172a;
-            font-weight: 500;
-            background: #ffffff;
-            border-color: #e2e8f0;
-        }
-
-        .theme-minimal-light .form-input:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
-        }
-
-        .theme-minimal-light .form-input::placeholder {
-            color: #94a3b8;
-        }
-
-        .theme-minimal-light .theme-name {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .keyboard-hint {
-            color: #64748b;
-            background: rgba(37, 99, 235, 0.1);
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .empty-title {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .theme-minimal-light .empty-text {
-            color: #334155;
-            font-weight: 500;
-        }
-
-        /* Enhanced Typography */
-        body {
-            font-family: var(--font-primary);
-            background: var(--bg-main);
-            color: var(--text-primary);
+        /* Tracker Specific Styles */
+        .tracker-container {
+            display: flex;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-normal);
-            font-optical-sizing: antialiased;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            padding-top: var(--nav-height);
         }
 
-        /* Better Typography for All Text */
-        /* Enhanced Panel Title - Premium Esports Grade */
-        .panel-title {
-            font-size: 24px;
+        .tracker-main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tracker-sidebar {
+            width: 300px;
+            background: rgba(15, 26, 47, 0.85);
+            backdrop-filter: blur(15px);
+            border-left: var(--nav-glow-height) solid transparent;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+
+        .tracker-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 900;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            letter-spacing: -0.005em;
-            font-family: var(--font-primary);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            position: relative;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-            width: 100%;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        @keyframes titleGlow {
-            0% { filter: brightness(1); }
-            100% { filter: brightness(1.05); }
-        }
-
-        .panel-title::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40%;
-            height: 1px;
-            background: var(--accent-soft);
-            border-radius: 1px;
-            animation: titleUnderline 3s ease-in-out infinite;
-        }
-
-        @keyframes titleUnderline {
-            0%, 100% { transform: translateX(-50%) scaleX(0); opacity: 0.3; }
-            50% { transform: translateX(-50%) scaleX(1); opacity: 0.6; }
-        }
-
-        /* Theme-specific title underline colors */
-        .theme-anichess-dark .panel-title::before {
-            background: rgba(59, 130, 246, 0.3);
-        }
-
-        .theme-anichess-void .panel-title::before {
-            background: rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-matrix-grind .panel-title::before {
-            background: rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-ember-arena .panel-title::before {
-            background: rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-minimal-light .panel-title::before {
-            background: rgba(37, 99, 235, 0.2);
-        }
-
-        .panel-title .title-text {
-            position: relative;
-            font-weight: 900;
-            letter-spacing: -0.005em;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        /* WIN RATE - Primary text */
-        .panel-title .title-text .win-rate {
-            color: var(--text-primary);
-            font-weight: 900;
-            letter-spacing: -0.005em;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        /* COUNTER - Accent text */
-        .panel-title .title-text .counter {
-            color: var(--accent);
-            font-weight: 800;
-            letter-spacing: 0;
-            opacity: 0.85;
-            font-optical-sizing: auto;
-            -webkit-font-feature-settings: "ss01", "ss02";
-            font-feature-settings: "ss01", "ss02";
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-            font-weight: var(--font-weight-muted);
-            font-family: var(--font-primary);
-        }
-
-        .keyboard-hint {
-            font-size: 10px;
-            color: var(--text-muted);
-            background: var(--accent-soft);
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: auto;
-            font-weight: var(--font-weight-muted);
-            font-family: var(--font-mono);
-        }
-
-        .form-label {
-            display: block;
-            font-size: 12px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-            font-family: var(--font-primary);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--accent-soft);
-            border: 1px solid var(--border-soft);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-normal);
-            font-family: var(--font-primary);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-soft);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-muted);
-            font-family: var(--font-primary);
-        }
-
-        /* Theme-Specific Button Styles */
-        .btn {
-            padding: 16px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: var(--font-weight-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-            font-family: var(--font-primary);
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .btn .keyboard-hint {
-            position: absolute;
-            top: 4px;
-            right: 8px;
-            font-size: 9px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-family: var(--font-mono);
-        }
-
-        /* Theme-Specific Button Styles */
-        .theme-anichess-dark .btn-win {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-dark .btn-win:hover {
-            background: linear-gradient(135deg, #059669, #0ea834);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .theme-anichess-dark .btn-loss {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-dark .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-anichess-void .btn-win {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-void .btn-win:hover {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-anichess-void .btn-loss {
-            background: linear-gradient(135deg, #f43f5e, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-anichess-void .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-win {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-matrix-grind .btn-win:hover {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-loss {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-matrix-grind .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-ember-arena .btn-win {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-ember-arena .btn-win:hover {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-ember-arena .btn-loss {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-ember-arena .btn-loss:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
-        }
-
-        .theme-minimal-light .btn-win {
-            background: linear-gradient(135deg, #16a34a, #14b8a1);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-minimal-light .btn-win:hover {
-            background: linear-gradient(135deg, #14b8a1, #14b8a1);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-minimal-light .btn-loss {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            color: white;
-            font-family: var(--font-primary);
-        }
-
-        .theme-minimal-light .btn-loss:hover {
-            background: linear-gradient(135deg, #b91c1c, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-main);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-normal);
-        }
-
-        /* Chess Background Animation */
-        .chess-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.4;
-            overflow: hidden;
-        }
-
-        .chess-piece {
-            position: absolute;
-            font-size: 24px;
-            color: var(--accent-blue);
-            opacity: 0.3;
-            animation: float 25s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px var(--accent-blue));
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-
-        .chess-piece.white {
-            color: var(--accent-green);
-            filter: drop-shadow(0 0 15px var(--accent-green));
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-        }
-
-        .chess-piece.gold {
-            color: var(--accent-orange);
-            filter: drop-shadow(0 0 15px var(--accent-orange));
-            text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg); 
-                opacity: 0.3;
-            }
-            25% { 
-                transform: translateY(-30px) rotate(8deg); 
-                opacity: 0.5;
-            }
-            50% { 
-                transform: translateY(15px) rotate(-5deg); 
-                opacity: 0.4;
-            }
-            75% { 
-                transform: translateY(-20px) rotate(3deg); 
-                opacity: 0.6;
-            }
-        }
-
-        @keyframes drift {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(30px); }
-            100% { transform: translateX(0); }
-        }
-
-        /* Enhanced Design Elements */
-        .container {
-            display: flex;
-            height: 100vh;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+            text-shadow: 0 0 40px rgba(6, 182, 212, 0.4);
             position: relative;
             z-index: 1;
-            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            line-height: 1.1;
         }
 
-        /* Enhanced Panel Headers */
-        .panel-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--border-soft);
-            background: var(--bg-card);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .panel-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Enhanced Counter Items */
-        .counter-item {
-            background: var(--bg-card);
+        .counter-card {
+            background: rgba(15, 26, 47, 0.85);
+            backdrop-filter: blur(15px);
             border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .counter-item::before {
+        .counter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--accent) 10%, 
+                var(--accent) 90%, 
+                transparent 100%);
+            background-size: 200% 100%;
+            background-position: -200% 0;
+            transition: background-position 0.5s ease;
+        }
+
+        .counter-card:hover::before {
+            background-position: 200% 0;
+        }
+
+        .counter-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(25, 230, 255, 0.3);
+            border-color: var(--accent);
+        }
+
+        .counter-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .counter-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 0 0 20px rgba(25, 230, 255, 0.3);
+        }
+
+        .counter-percentage {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .counter-percentage.positive {
+            color: var(--success);
+        }
+
+        .counter-percentage.negative {
+            color: var(--danger);
+        }
+
+        .tracker-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tracker-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(15, 26, 47, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(25, 230, 255, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .tracker-actions:hover {
+            border-color: rgba(25, 230, 255, 0.2);
+            background: rgba(15, 26, 47, 0.7);
+        }
+
+        .btn-win, .btn-loss {
+            flex: 1;
+            padding: 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-win {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        .btn-loss {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+        }
+
+        .btn-win:hover:not(:disabled), .btn-loss:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-win:hover:not(:disabled) {
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-loss:hover:not(:disabled) {
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-win:disabled, .btn-loss:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            filter: grayscale(50%);
+        }
+
+        .btn-undo {
+            flex: 1;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-undo:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.3);
+        }
+
+        .btn-undo:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            filter: grayscale(50%);
+        }
+
+        .btn-undo:disabled:hover {
+            box-shadow: none;
+        }
+
+        /* Gamemode Selection */
+        .gamemode-selection {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(15, 26, 47, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+        }
+
+        .gamemode-selection h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .gamemode-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .gamemode-btn {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            justify-content: center;
+        }
+
+        .gamemode-btn span:first-child {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .gamemode-btn span:last-child {
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .gamemode-icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 6px 12px rgba(122, 211, 255, 0.25));
+        }
+
+        .gamemode-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .gamemode-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            color: #0a0b12;
+            border-color: var(--accent);
+            box-shadow: 0 4px 15px rgba(25, 230, 255, 0.3);
+        }
+
+        .gamemode-btn.active .gamemode-icon {
+            filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35)) saturate(1.15);
+            transform: scale(1.5);
+        }
+
+        .gamemode-btn:not(.active) .gamemode-icon {
+            opacity: 0.75;
+        }
+
+        /* Mobile Dropdown */
+        .gamemode-dropdown {
+            display: none;
+            position: relative;
+        }
+
+        .gamemode-dropdown select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(15, 26, 47, 0.85);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .gamemode-dropdown select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(25, 230, 255, 0.1);
+        }
+
+        .gamemode-dropdown select option {
+            background: rgba(15, 26, 47, 0.95);
+            color: var(--text-primary);
+            padding: 0.5rem;
+        }
+
+        .goal-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .current-goal {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .goal-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .goal-value {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            background: rgba(25, 230, 255, 0.1);
+            border: 1px solid rgba(25, 230, 255, 0.3);
+            border-radius: 8px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .reset-goal-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reset-goal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Daily Planning */
+        .daily-planning {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(25, 230, 255, 0.05) 0%, rgba(6, 182, 212, 0.03) 100%);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(25, 230, 255, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(25, 230, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .daily-planning::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            background: linear-gradient(90deg, transparent, rgba(25, 230, 255, 0.5), transparent);
         }
 
-        .counter-item:hover::before {
-            opacity: 1;
-        }
-
-        /* Enhanced Stat Cards */
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 20px;
+        .daily-planning h3 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
             text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .stat-card:hover::after {
-            opacity: 1;
-        }
-
-        /* Enhanced Buttons */
-        .btn {
-            padding: 16px 24px;
-            border: none;
+        .goal-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(15, 26, 47, 0.6);
+            border: 1px solid rgba(25, 230, 255, 0.15);
             border-radius: 12px;
-            font-size: 16px;
-            font-weight: var(--font-weight-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .goal-display:hover {
+            background: rgba(15, 26, 47, 0.8);
+            border-color: rgba(25, 230, 255, 0.3);
+            box-shadow: 0 4px 16px rgba(25, 230, 255, 0.1);
+        }
+
+        .current-goal {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .goal-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .goal-value {
+            color: var(--accent);
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 0.625rem 1.25rem;
+            background: rgba(25, 230, 255, 0.1);
+            border: 1px solid rgba(25, 230, 255, 0.3);
+            border-radius: 10px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .goal-value.not-set {
+            color: var(--text-secondary);
+            background: rgba(107, 114, 128, 0.1);
+            border-color: rgba(107, 114, 128, 0.3);
+        }
+
+        .goal-notice {
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.05));
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            color: #fca5a5;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .goal-notice span:first-child {
+            font-size: 1.3rem;
+        }
+
+        .reset-goal-btn {
+            padding: 0.875rem 1.75rem;
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-            font-family: var(--font-primary);
-            letter-spacing: var(--letter-spacing-tight);
+            gap: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
+        .reset-goal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
         }
 
-        .btn:active::before {
-            width: 300px;
-            height: 300px;
+        .goal-progress {
+            margin-top: 1.25rem;
         }
 
-        /* Enhanced Progress Bar */
-        .progress-bar-container {
-            background: var(--accent-soft);
-            border-radius: 12px;
+        .progress-bar {
+            width: 100%;
             height: 20px;
+            background: rgba(15, 26, 47, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
             overflow: hidden;
-            position: relative;
-            border: 1px solid var(--border-soft);
+            margin-bottom: 0.625rem;
         }
 
-        .progress-bar-fill {
+        .progress-fill {
             height: 100%;
-            background: var(--accent);
-            border-radius: 12px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            width: 0%;
             transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: progressShimmer 2s infinite;
-        }
-
-        @keyframes progressShimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Enhanced Modal */
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 24px;
-            width: 90%;
-            max-width: 450px;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--success), var(--danger));
-            border-radius: 16px 16px 0 0;
-        }
-
-        /* Enhanced Footer */
-        .footer {
-            background: var(--bg-panel);
-            border-top: 1px solid var(--border-soft);
-            padding: 20px 24px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-secondary);
-            opacity: 0.9;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        /* Enhanced Theme Picker */
-        .theme-preview {
-            background: var(--bg-card);
-            border: 2px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .theme-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .theme-preview:hover::before {
-            opacity: 1;
-        }
-
-        /* Floating Particles */
-        .floating-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.3;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) translateX(0); 
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            50% { 
-                transform: translateY(-100px) translateX(50px); 
-            }
-        }
-
-        /* Enhanced Win Rate Display */
-        .stat-value.winrate {
-            position: relative;
-            display: inline-block;
-        }
-
-        .stat-value.winrate::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, var(--accent), var(--success), var(--accent));
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: -1;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.1; }
-            50% { transform: scale(1.1); opacity: 0.2; }
-        }
-
-        /* Enhanced Empty State */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-secondary);
-            text-align: center;
-            position: relative;
-        }
-
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        /* Left Panel */
-        .left-panel {
-            width: 360px;
-            background: var(--bg-panel);
-            border-right: 1px solid var(--border-soft);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .panel-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--border-soft);
-            background: var(--bg-card);
-        }
-
-        /* Theme-Specific Footer Styles */
-        .theme-anichess-dark .footer {
-            background: var(--bg-panel);
-            border-top: 1px solid var(--border-soft);
-        }
-
-        .theme-anichess-void .footer {
-            background: #0d0d14;
-            border-top: 1px solid rgba(139, 92, 246, 0.1);
-        }
-
-        .theme-matrix-grind .footer {
-            background: #0b0f0b;
-            border-top: 1px solid rgba(34, 197, 94, 0.1);
-        }
-
-        .theme-ember-arena .footer {
-            background: #1c120c;
-            border-top: 1px solid rgba(249, 115, 22, 0.1);
-        }
-
-        .theme-minimal-light .footer {
-            background: #f1f5f9;
-            border-top: 1px solid rgba(15, 23, 42, 0.1);
-        }
-
-        .theme-picker-btn {
-            background: var(--accent-soft);
-            border: 1px solid var(--border-soft);
-            color: var(--text-secondary);
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-            margin-left: auto;
-            font-weight: var(--font-weight-muted);
-        }
-
-        .theme-picker-btn:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .keyboard-hint {
-            font-size: 10px;
-            color: var(--text-muted);
-            background: var(--accent-soft);
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: auto;
-            font-weight: var(--font-weight-muted);
-        }
-
-        .add-counter-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .add-counter-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-soft);
-            filter: brightness(1.1);
-        }
-
-        .counters-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-        }
-
-        .counter-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        /* Theme-Specific Counter Item Hover Effects */
-        .theme-anichess-dark .counter-item:hover {
-            background: var(--accent-soft);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        }
-
-        .theme-anichess-void .counter-item:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
-        }
-
-        .theme-matrix-grind .counter-item:hover {
-            background: rgba(34, 197, 94, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
-        }
-
-        .theme-ember-arena .counter-item:hover {
-            background: rgba(249, 115, 22, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
-        }
-
-        .theme-minimal-light .counter-item:hover {
-            background: rgba(37, 99, 235, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-        }
-
-        .counter-item.active {
-            background: var(--accent-soft);
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-soft);
-        }
-
-        .counter-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .counter-title {
-            font-size: 16px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            flex: 1;
-            margin-right: 8px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .trend-indicator {
-            font-size: 12px;
-            margin-left: 4px;
-        }
-
-        .trend-up { color: var(--success); }
-        .trend-down { color: var(--danger); }
-        .trend-stable { color: var(--text-muted); }
-
-        .win-rate-pill {
-            background: var(--accent);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: var(--font-weight-secondary);
-            min-width: 45px;
-            text-align: center;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .counter-stats {
-            display: flex;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .stat-wins { color: var(--success); }
-        .stat-losses { color: var(--danger); }
-
-        /* Progress Bar Styles */
-        .progress-section {
-            margin-bottom: 24px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .progress-title {
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            letter-spacing: var(--letter-spacing-tight);
+            border-radius: 8px;
         }
 
         .progress-text {
-            font-size: 12px;
             color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .progress-bar-container {
-            background: var(--accent-soft);
-            border-radius: 12px;
-            height: 20px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid var(--border-soft);
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 12px;
-            transition: width 0.5s ease;
-            position: relative;
-        }
-
-        .progress-bar-fill.low {
-            background: var(--danger);
-        }
-
-        .progress-bar-fill.medium {
-            background: var(--warning);
-        }
-
-        .progress-bar-fill.high {
-            background: var(--success);
-        }
-
-        .progress-percentage {
-            position: absolute;
-            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
             text-align: center;
-            font-size: 11px;
-            font-weight: var(--font-weight-secondary);
-            color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            line-height: 20px;
-            font-variant-numeric: tabular-nums;
         }
 
         /* Modal Styles */
@@ -1256,11 +556,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 10000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -1271,1917 +572,1605 @@
             visibility: visible;
         }
 
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 24px;
+        .modal-content {
+            background: rgba(15, 26, 47, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(25, 230, 255, 0.2);
+            border-radius: 20px;
+            padding: 0;
+            max-width: 420px;
             width: 90%;
-            max-width: 450px;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            max-height: 80vh;
-            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(25, 230, 255, 0.1);
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
         }
 
-        .modal-overlay.active .modal {
-            transform: scale(1);
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
         }
 
         .modal-header {
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: var(--font-weight-primary);
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .modal-subtitle {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 12px;
-            font-weight: var(--font-weight-secondary);
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--accent-soft);
-            border: 1px solid var(--border-soft);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-soft);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .modal-buttons {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-header h3 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--danger);
+            transform: scale(1.05);
+        }
+
+        .modal-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .modal-body p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-input {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .modal-input input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .modal-input input:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(25, 230, 255, 0.1);
+        }
+
+        .modal-input input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .modal-note {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            border-radius: 8px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 0 2rem 2rem;
         }
 
         .modal-btn {
             flex: 1;
-            padding: 10px 16px;
+            padding: 1rem;
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
+            border-radius: 12px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: var(--letter-spacing-tight);
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .modal-btn-primary {
-            background: var(--accent);
-            color: white;
+        .modal-btn.cancel {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .modal-btn-primary:hover {
+        .modal-btn.cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-1px);
-            box-shadow: var(--shadow-soft);
         }
 
-        .modal-btn-secondary {
-            background: var(--accent-soft);
-            color: var(--text-primary);
-            border: 1px solid var(--border-soft);
+        .modal-btn.confirm {
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            color: var(--bg-main);
+            box-shadow: 0 4px 15px rgba(25, 230, 255, 0.3);
         }
 
-        .modal-btn-secondary:hover {
-            background: var(--bg-panel);
+        .modal-btn.confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 230, 255, 0.4);
         }
 
-        /* Theme Picker Styles */
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
+        .modal-btn.confirm::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
 
-        .theme-option {
-            cursor: pointer;
-            transition: transform 0.2s ease;
+        .modal-btn.confirm:hover::before {
+            left: 100%;
         }
 
-        .theme-option:hover {
-            transform: scale(1.05);
+        .goal-progress {
+            margin-top: 1rem;
         }
 
-        .theme-preview {
-            background: var(--bg-card);
-            border: 2px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .theme-preview:hover {
-            border-color: var(--accent);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .theme-preview.theme-anichess-dark-preview {
-            background: #0a0a0f;
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        .theme-preview.theme-anichess-void-preview {
-            background: #050508;
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-preview.theme-matrix-grind-preview {
-            background: #050505;
-            border-color: rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-preview.theme-ember-arena-preview {
-            background: #0c0a09;
-            border-color: rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-preview.theme-minimal-light-preview {
-            background: #f8fafc;
-            border-color: rgba(37, 99, 235, 0.3);
-            color: #0f172a;
-        }
-
-        .theme-name {
-            font-size: 14px;
-            font-weight: var(--font-weight-secondary);
-            margin-bottom: 8px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .theme-colors {
-            display: flex;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .theme-colors span {
-            width: 20px;
+        .progress-bar {
+            width: 100%;
             height: 20px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .theme-minimal-light-preview .theme-colors span {
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-
-        /* Right Panel */
-        .right-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .counter-details {
-            flex: 1;
-            padding: 32px;
-            overflow-y: auto;
-        }
-
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-secondary);
-            text-align: center;
-        }
-
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        .empty-title {
-            font-size: 20px;
-            font-weight: var(--font-weight-secondary);
-            margin-bottom: 8px;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .empty-text {
-            font-size: 14px;
-        }
-
-        .counter-detail-header {
-            margin-bottom: 24px;
-        }
-
-        .detail-title-input {
-            font-size: 28px;
-            font-weight: var(--font-weight-primary);
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            width: 100%;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s ease;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .detail-title-input:focus {
-            outline: none;
-            border-bottom-color: var(--accent);
-            box-shadow: 0 2px 8px var(--accent-soft);
-        }
-
-        .detail-title-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
+            background: rgba(15, 26, 47, 0.6);
             border: 1px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
+            border-radius: 10px;
             overflow: hidden;
+            margin-bottom: 0.5rem;
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Theme-Specific Hover Effects */
-        .theme-anichess-dark .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-        }
-
-        .theme-anichess-dark .btn-win:hover {
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .theme-anichess-dark .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-anichess-void .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-anichess-void .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-anichess-void .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
-        }
-
-        .theme-matrix-grind .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-matrix-grind .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-ember-arena .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-ember-arena .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-ember-arena .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
-        }
-
-        .theme-minimal-light .stat-card:hover {
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-        }
-
-        .theme-minimal-light .btn-win:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-minimal-light .btn-loss:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card.win-rate {
-            background: var(--accent-soft);
-            border-color: var(--accent);
-        }
-
-        .stat-card.win-rate::before {
-            background: var(--accent);
-            opacity: 1;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: var(--letter-spacing-wide);
-            font-weight: var(--font-weight-muted);
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: var(--font-weight-primary);
-            line-height: 1;
-            position: relative;
-            display: inline-block;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .stat-value.wins { 
-            color: var(--success);
-            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-        }
-
-        .stat-value.losses { 
-            color: var(--danger);
-            text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-        }
-
-        .stat-value.total { 
-            color: var(--text-primary);
-            text-shadow: 0 0 10px rgba(229, 231, 235, 0.2);
-        }
-
-        .stat-value.winrate { 
-            color: var(--accent);
-            font-size: 32px;
-            font-weight: 800;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            position: relative;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: var(--letter-spacing-tight);
-        }
-
-        .theme-anichess-void .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-matrix-grind .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-        }
-
-        .theme-ember-arena .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-        }
-
-        .theme-minimal-light .stat-value.winrate {
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
-        }
-
-        .stat-value.winrate::after {
-            content: '%';
-            font-size: 18px;
-            font-weight: var(--font-weight-secondary);
-            margin-left: 2px;
-            color: var(--accent);
-        }
-
-        .modal-btn-secondary {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .modal-btn-secondary:hover {
-            background: var(--bg-secondary);
-        }
-
-        /* Right Panel - Counter Details */
-        .right-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .counter-details {
-            flex: 1;
-            padding: 32px;
-            overflow-y: auto;
-        }
-
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .progress-fill {
             height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 8px;
+        }
+
+        .progress-text {
             color: var(--text-secondary);
+            font-size: 0.9rem;
             text-align: center;
         }
 
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        .empty-title {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .empty-text {
-            font-size: 14px;
-        }
-
-        .counter-detail-header {
-            margin-bottom: 32px;
-        }
-
-        .detail-title-input {
-            font-size: 28px;
-            font-weight: 600;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            width: 100%;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s ease;
-        }
-
-        .detail-title-input:focus {
-            outline: none;
-            border-bottom-color: var(--accent-blue);
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-        }
-
-        .detail-title-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-blue);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-blue);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card.win-rate {
-            background: linear-gradient(135deg, var(--bg-card), rgba(59, 130, 246, 0.1));
-            border-color: var(--accent-blue);
-        }
-
-        .stat-card.win-rate::before {
-            background: var(--gradient-blue);
-            opacity: 1;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            line-height: 1;
-            position: relative;
-            display: inline-block;
-        }
-
-        .stat-value.wins { 
-            color: var(--accent-green);
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-        }
-
-        .stat-value.losses { 
-            color: var(--accent-red);
-            text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-        }
-
-        .stat-value.total { 
-            color: var(--text-primary);
-            text-shadow: 0 0 10px rgba(229, 231, 235, 0.2);
-        }
-
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .btn {
-            padding: 16px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Theme-Specific Button Effects */
-        .theme-anichess-dark .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-anichess-dark .btn-win:hover {
-            background: #059669;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .theme-anichess-dark .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-anichess-dark .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-anichess-void .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-anichess-void .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-anichess-void .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-anichess-void .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-matrix-grind .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-matrix-grind .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-matrix-grind .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .theme-ember-arena .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-ember-arena .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-ember-arena .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-ember-arena .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
-        }
-
-        .theme-minimal-light .btn-win {
-            background: var(--success);
-            color: white;
-        }
-
-        .theme-minimal-light .btn-win:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-        }
-
-        .theme-minimal-light .btn-loss {
-            background: var(--danger);
-            color: white;
-        }
-
-        .theme-minimal-light .btn-loss:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .btn .keyboard-hint {
-            position: absolute;
-            top: 4px;
-            right: 8px;
-            font-size: 9px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-
-        .secondary-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .btn-secondary {
-            padding: 10px 16px;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-hover);
-            border-color: var(--accent-blue);
-        }
-
-        .btn-secondary .keyboard-hint {
-            font-size: 9px;
-            background: var(--bg-hover);
-            color: var(--text-muted);
-            padding: 1px 4px;
-            border-radius: 3px;
-        }
-
-        .btn-danger {
-            color: var(--accent-red);
-            border-color: var(--accent-red);
-        }
-
-        .btn-danger:hover {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: var(--accent-red);
-        }
-
-        /* History Section */
-        .history-section {
-            margin-top: 32px;
-        }
-
-        .history-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-        }
-
-        .history-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .history-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .history-item.win {
-            border-left: 3px solid var(--accent-green);
-        }
-
-        .history-item.loss {
-            border-left: 3px solid var(--accent-red);
-        }
-
-        .history-time {
-            color: var(--text-secondary);
-            font-size: 12px;
-            margin-left: auto;
-        }
-
-        /* Mobile Responsive */
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
+            .tracker-container {
                 flex-direction: column;
             }
-
-            .left-panel {
-                width: 100%;
-                height: 40vh;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .right-panel {
-                height: 60vh;
-            }
-
-            .counter-details {
-                padding: 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            .stat-card {
-                padding: 16px;
-            }
-
-            .stat-value {
-                font-size: 24px;
-            }
-
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes celebrate {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .counter-item {
-            animation: slideIn 0.3s ease;
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-blue);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 20px 24px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-secondary);
-            opacity: 0.9;
-        }
-
-        .footer-credit {
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        .footer-support {
-            margin-bottom: 10px;
-            opacity: 0.7;
-        }
-
-        .wallet-address {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-hover);
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            display: inline-block;
-            margin: 8px 0;
-            font-size: 10px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .wallet-address:hover {
-            background: var(--accent-blue);
-            color: white;
-            border-color: var(--accent-blue);
-        }
-
-        .copy-btn {
-            font-size: 11px;
-            padding: 6px 12px;
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-left: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background: var(--accent-blue-hover);
-            transform: translateY(-1px);
-        }
-
-        .copy-btn.copied {
-            background: var(--accent-green);
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .chess-piece {
-                animation: none;
+            
+            .tracker-main {
+                padding: 1rem;
             }
             
-            * {
-                transition: none !important;
+            .tracker-sidebar {
+                width: 100%;
+                border-left: none;
+                border-top: var(--nav-glow-height) solid transparent;
+                padding: 1.5rem 1rem;
             }
+
+            .tracker-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .tracker-stats {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .counter-card {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .counter-value {
+                font-size: 2rem;
+            }
+            
+            .tracker-actions {
+                flex-direction: column;
+                gap: 0.75rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .btn-win, .btn-loss, .btn-undo {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            /* Mobile Dropdown for Gamemode */
+            .gamemode-buttons {
+                display: none;
+            }
+
+            .gamemode-dropdown {
+                display: block;
+            }
+
+            .gamemode-selection {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .daily-planning {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .daily-planning h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .goal-display {
+                padding: 1rem;
+                margin-bottom: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .current-goal {
+                justify-content: center;
+                gap: 0.75rem;
+            }
+
+            .goal-label {
+                font-size: 1rem;
+            }
+
+            .goal-value {
+                font-size: 1.3rem;
+                padding: 0.625rem 1.25rem;
+                min-width: 100px;
+            }
+
+            .reset-goal-btn {
+                padding: 0.875rem 1.75rem;
+                font-size: 0.9rem;
+                align-self: center;
+                min-width: 140px;
+            }
+
+            .progress-bar {
+                height: 20px;
+            }
+
+            .progress-text {
+                font-size: 1rem;
+            }
+
+            /* Modal responsive */
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .modal-header {
+                padding: 1.5rem 1.5rem 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem 1.5rem 1.5rem;
+            }
+
+            .modal-actions {
+                padding: 0 1.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tracker-main {
+                padding: 0.75rem;
+            }
+
+            .tracker-sidebar {
+                padding: 1rem 0.75rem;
+            }
+
+            .tracker-title {
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .tracker-stats {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .counter-card {
+                padding: 0.75rem;
+            }
+
+            .counter-value {
+                font-size: 1.75rem;
+            }
+
+            .tracker-actions {
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .btn-win, .btn-loss, .btn-undo {
+                padding: 0.875rem;
+                font-size: 0.9rem;
+            }
+
+            .gamemode-selection,
+            .daily-planning {
+                padding: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .daily-planning h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.875rem;
+            }
+
+            .goal-display {
+                padding: 0.875rem;
+                gap: 0.875rem;
+            }
+
+            .current-goal {
+                gap: 0.5rem;
+            }
+
+            .goal-label {
+                font-size: 0.9rem;
+            }
+
+            .goal-value {
+                font-size: 1.2rem;
+                padding: 0.5rem 1rem;
+                min-width: 90px;
+            }
+
+            .reset-goal-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.85rem;
+                min-width: 120px;
+            }
+
+            .progress-bar {
+                height: 18px;
+            }
+
+            .progress-text {
+                font-size: 0.9rem;
+            }
+        }
+        /* ========================================
+           TRACKER UI REFRESH 2026
+           ======================================== */
+        .tracker-container {
+            background: transparent;
+        }
+
+        .tracker-main {
+            padding-top: 2.5rem;
+        }
+
+        .tracker-sidebar {
+            background: rgba(10, 14, 18, 0.82);
+            border-left: 1px solid var(--border-soft);
+            box-shadow: inset 6px 0 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .tracker-title {
+            font-family: var(--font-display);
+            letter-spacing: -0.03em;
+            text-shadow: 0 10px 40px rgba(122, 211, 255, 0.28);
+        }
+
+        .counter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 16px 36px rgba(5, 7, 9, 0.35);
+        }
+
+        .counter-card::before {
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent-secondary), transparent);
+        }
+
+        .tracker-actions {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-medium);
+            border-radius: 18px;
+            padding: 1.5rem;
+            box-shadow: 0 18px 30px rgba(5, 7, 9, 0.25);
+        }
+
+        .btn-win {
+            background: linear-gradient(135deg, #45e1c5, #22b7a7);
+            box-shadow: 0 12px 24px rgba(69, 225, 197, 0.28);
+        }
+
+        .btn-loss {
+            background: linear-gradient(135deg, #ff7eb6, #d86adf);
+            box-shadow: 0 12px 24px rgba(216, 106, 223, 0.28);
+        }
+
+        .btn-undo {
+            background: linear-gradient(135deg, #7f8ad1, #5b6bb2);
+            box-shadow: 0 12px 24px rgba(95, 110, 184, 0.2);
+        }
+
+        .btn-win:hover:not(:disabled),
+        .btn-loss:hover:not(:disabled),
+        .btn-undo:hover:not(:disabled) {
+            transform: translateY(-3px);
+        }
+
+        .gamemode-selection,
+        .daily-planning {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-medium);
+            box-shadow: 0 12px 28px rgba(5, 7, 9, 0.28);
+        }
+
+        .gamemode-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gamemode-btn.active {
+            color: #0b0f13;
+            box-shadow: 0 10px 24px rgba(25, 211, 197, 0.28);
+        }
+
+        .goal-display {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .goal-value {
+            background: rgba(25, 211, 197, 0.12);
+            border-color: rgba(25, 211, 197, 0.35);
+        }
+
+        .progress-bar {
+            background: rgba(13, 18, 27, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-content {
+            background: #101621;
+            border: 1px solid var(--border-medium);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-btn.confirm {
+            color: #0b0f13;
+        }
+
+        /* Tracker polish - Theme 1 alignment */
+        .tracker-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tracker-main {
+            padding: 2.75rem 2.75rem 3.25rem;
+        }
+
+        .tracker-sidebar {
+            background: rgba(14, 16, 28, 0.86);
+            border-left: 1px solid var(--border-soft);
+            box-shadow: inset 6px 0 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .counter-card {
+            border-radius: 18px;
+            box-shadow: 0 18px 38px rgba(6, 8, 15, 0.35);
+        }
+
+        .counter-card::before {
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent-secondary), transparent);
+        }
+
+        .tracker-actions {
+            border-radius: 18px;
+            border: 1px solid var(--border-medium);
+            background: rgba(14, 16, 28, 0.78);
+        }
+
+        .gamemode-selection,
+        .daily-planning {
+            border-radius: 18px;
+            border: 1px solid var(--border-medium);
+            background: rgba(14, 16, 28, 0.86);
+        }
+
+        .gamemode-btn {
+            border-radius: 14px;
+        }
+
+        .goal-display {
+            border-radius: 14px;
+            background: rgba(16, 18, 32, 0.65);
+        }
+
+        .goal-value {
+            border-radius: 12px;
+            background: rgba(122, 211, 255, 0.12);
+            border-color: rgba(122, 211, 255, 0.3);
+        }
+
+        .progress-bar {
+            border-radius: 12px;
+            background: rgba(12, 14, 24, 0.8);
+        }
+
+        .progress-fill {
+            border-radius: 10px;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-title {
+            color: var(--text-primary);
+            margin: 0;
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .sidebar-toggle {
+            border: 1px solid var(--border-medium);
+            background: rgba(16, 18, 32, 0.6);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .sidebar-toggle:hover {
+            border-color: var(--border-glow);
+            color: var(--text-primary);
+        }
+
+        .tracker-sidebar.collapsed {
+            width: 90px;
+            padding: 2rem 0.75rem;
+        }
+
+        .tracker-sidebar.collapsed .sidebar-title,
+        .tracker-sidebar.collapsed .sidebar-content {
+            display: none;
+        }
+
+        .tracker-sidebar.collapsed .sidebar-toggle {
+            width: 100%;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
-    <!-- Chess Background Animation -->
-    <div class="chess-background" id="chessBackground"></div>
-    
-    <!-- Floating Particles -->
-    <div class="floating-particles" id="floatingParticles"></div>
+    <!-- Chess Background -->
+    <div id="chessBackground" class="chess-background"></div>
 
-    <div class="container">
-        <!-- Left Panel -->
-        <aside class="left-panel">
-            <div class="panel-header">
-                <h1 class="panel-title">
-                    <span class="title-text">
-                        <span class="win-rate">WIN RATE</span>
-                        <span class="counter">COUNTER</span>
-                    </span>
-                </h1>
-                <div style="display: flex; gap: 8px;">
-                    <button class="theme-picker-btn" onclick="showThemePicker()">🎨</button>
-                    <button class="add-counter-btn" onclick="addNewCounter()">
-                        <span>+</span>
-                        <span>Add New Counter</span>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">
+                <img src="../assets/icon-logo.png" alt="Anichess Companion Logo" class="nav-logo">
+                Anichess Companion
+            </a>
+            <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Tracker</a>
+                <a href="../leaderboard/" class="nav-link disabled" data-tooltip="Coming soon">Leaderboard</a>
+                <a href="../matches/" class="nav-link disabled" data-tooltip="Coming soon">Matches</a>
+                <a href="../profile/" class="nav-link disabled" data-tooltip="Coming soon">Profiles</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tracker Container -->
+    <div class="tracker-container">
+        <!-- Main Content -->
+        <main class="tracker-main">
+            <h1 class="tracker-title">Performance Tracker</h1>
+            
+            <!-- Gamemode Selection -->
+            <div class="gamemode-selection">
+                <h3>Select Gamemode</h3>
+                <div class="gamemode-buttons">
+                    <button class="gamemode-btn" data-mode="quickmode" data-icon="../assets/icon-quickmode.png" data-icon-selected="../assets/icon-quickmode-black.png" onclick="selectGamemode('quickmode')">
+                        <img class="gamemode-icon" src="../assets/icon-quickmode.png" alt="Quickmode icon">
+                        <span>Quickmode</span>
+                    </button>
+                    <button class="gamemode-btn" data-mode="ranked" data-icon="../assets/icon-ranked.png" data-icon-selected="../assets/icon-ranked-black.png" onclick="selectGamemode('ranked')">
+                        <img class="gamemode-icon" src="../assets/icon-ranked.png" alt="Ranked icon">
+                        <span>Ranked Mode</span>
+                    </button>
+                    <button class="gamemode-btn" data-mode="checkmate" data-icon="../assets/icon-checkmate.png" data-icon-selected="../assets/icon-checkmate-black.png" onclick="selectGamemode('checkmate')">
+                        <img class="gamemode-icon" src="../assets/icon-checkmate.png" alt="Checkmate icon">
+                        <span>Checkmate Arena</span>
                     </button>
                 </div>
+                <div class="gamemode-dropdown">
+                    <select id="gamemodeSelect" onchange="selectGamemode(this.value)">
+                        <option value="quickmode">? Quickmode</option>
+                        <option value="ranked">?? Ranked Mode</option>
+                        <option value="checkmate">?? Checkmate Arena</option>
+                    </select>
+                </div>
             </div>
-            <div class="counters-list" id="countersList">
-                <!-- Counters will be dynamically added here -->
-            </div>
-        </aside>
 
-        <!-- Right Panel -->
-        <main class="right-panel">
-            <div class="counter-details" id="counterDetails">
-                <div class="empty-state">
-                    <div class="empty-icon">📊</div>
-                    <h2 class="empty-title">No Counter Selected</h2>
-                    <p class="empty-text">Select a counter from the left or create a new one to start tracking your win rate</p>
+            <!-- Daily Game Planning -->
+            <div class="daily-planning" id="dailyPlanning" style="display: none;">
+                <h3 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.2rem; font-weight: 600;">Daily Game Goal</h3>
+                <div class="goal-display" id="goalDisplay">
+                    <div class="current-goal">
+                        <span class="goal-label">Current Goal:</span>
+                        <span class="goal-value" id="currentGoalValue">Not Set</span>
+                    </div>
+                    <button class="reset-goal-btn" id="resetGoalBtn" onclick="openGoalModal()">
+                        <span>??</span>
+                        <span>Reset Goal</span>
+                    </button>
+                </div>
+                <div class="goal-progress" id="goalProgress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0 / 0 games completed</div>
+                </div>
+                <div class="goal-notice" id="goalNotice" style="display: none;">
+                    <span>??</span>
+                    <span>Set a daily goal to start tracking!</span>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="tracker-actions">
+                <button class="btn-win" onclick="recordWin()">
+                    <span>??</span>
+                    <span>Win</span>
+                </button>
+                <button class="btn-loss" onclick="recordLoss()">
+                    <span>??</span>
+                    <span>Loss</span>
+                </button>
+                <button class="btn-undo" onclick="undoLastAction()">
+                    <span>??</span>
+                    <span>Undo</span>
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="tracker-stats">
+                <div class="counter-card">
+                    <div class="counter-label">Total Games</div>
+                    <div class="counter-value" id="totalGames">0</div>
+                    <div class="counter-percentage">
+                        <span>??</span>
+                        <span>All time</span>
+                    </div>
+                </div>
+                
+                <div class="counter-card">
+                    <div class="counter-label">Wins</div>
+                    <div class="counter-value" id="totalWins">0</div>
+                    <div class="counter-percentage positive">
+                        <span>??</span>
+                        <span id="winPercentage">0%</span>
+                    </div>
+                </div>
+                
+                <div class="counter-card">
+                    <div class="counter-label">Losses</div>
+                    <div class="counter-value" id="totalLosses">0</div>
+                    <div class="counter-percentage negative">
+                        <span>??</span>
+                        <span id="lossPercentage">0%</span>
+                    </div>
+                </div>
+                
+                <div class="counter-card">
+                    <div class="counter-label">Current Streak</div>
+                    <div class="counter-value" id="currentStreak">0</div>
+                    <div class="counter-percentage">
+                        <span>??</span>
+                        <span id="streakType">None</span>
+                    </div>
                 </div>
             </div>
         </main>
+
+        <!-- Sidebar -->
+        <aside class="tracker-sidebar" id="trackerSidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">Quick Stats</h2>
+                <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-expanded="true" aria-controls="trackerSidebar">
+                    Minimize
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="counter-card">
+                    <div class="counter-label">Session Games</div>
+                    <div class="counter-value" id="sessionGames">0</div>
+                    <div class="counter-percentage">
+                        <span>??</span>
+                        <span>Today</span>
+                    </div>
+                </div>
+                
+                <div class="counter-card">
+                    <div class="counter-label">Best Win Streak</div>
+                    <div class="counter-value" id="bestStreak">0</div>
+                    <div class="counter-percentage positive">
+                        <span>??</span>
+                        <span>Record</span>
+                    </div>
+                </div>
+                
+                <div class="counter-card">
+                    <div class="counter-label">Recent Form</div>
+                    <div class="counter-value" id="recentForm">-</div>
+                    <div class="counter-percentage">
+                        <span>??</span>
+                        <span>Last 10</span>
+                    </div>
+                </div>
+            </div>
+            <a class="site-credit" href="https://twitter.com/riisui_" target="_blank" rel="noopener noreferrer">Made by @riisui_</a>
+        </aside>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-credit">
-            <strong>Built by <a href="https://x.com/riisui_" target="_blank" style="color: var(--accent-blue); text-decoration: none;">@riisui_</a></strong>
-        </div>
-        <div class="footer-support">
-            Support continued development and help us keep this tool free for everyone
-        </div>
-        <div>
-            <button class="copy-btn" id="copyBtn" onclick="copyWalletAddress()">Copy Address</button>
-        </div>
-        <div style="margin-top: 8px; font-size: 10px; opacity: 0.5;">
-            ETH / EVM-compatible networks
-        </div>
-    </footer>
-
-    <!-- Theme Picker Modal -->
-    <div class="modal-overlay" id="themePickerModal">
-        <div class="modal">
+    <!-- Goal Reset Modal -->
+    <div class="modal-overlay" id="goalModal" style="display: none;">
+        <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Choose Theme</h2>
-                <p class="modal-subtitle">Select your preferred color scheme</p>
+                <h3>Reset Daily Goal</h3>
+                <button class="modal-close" onclick="closeGoalModal()">?</button>
             </div>
-            
-            <div class="theme-grid">
-                <div class="theme-option" onclick="setTheme('theme-anichess-dark')">
-                    <div class="theme-preview theme-anichess-dark-preview">
-                        <div class="theme-name">Anichess Dark</div>
-                        <div class="theme-colors">
-                            <span style="background: #3b82f6;"></span>
-                            <span style="background: #10b981;"></span>
-                            <span style="background: #ef4444;"></span>
-                        </div>
-                    </div>
+            <div class="modal-body">
+                <p>Enter new daily goal for <span id="modalGamemode" style="color: var(--accent); font-weight: 600;"></span>:</p>
+                <div class="modal-input">
+                    <input type="number" id="modalGoalInput" min="1" max="50" value="10" placeholder="Enter number (1-50)">
                 </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-anichess-void')">
-                    <div class="theme-preview theme-anichess-void-preview">
-                        <div class="theme-name">Anichess Void</div>
-                        <div class="theme-colors">
-                            <span style="background: #8b5cf6;"></span>
-                            <span style="background: #22c55e;"></span>
-                            <span style="background: #f43f5e;"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-matrix-grind')">
-                    <div class="theme-preview theme-matrix-grind-preview">
-                        <div class="theme-name">Matrix Grind</div>
-                        <div class="theme-colors">
-                            <span style="background: #22c55e;"></span>
-                            <span style="background: #facc15;"></span>
-                            <span style="background: #ef4444;"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-ember-arena')">
-                    <div class="theme-preview theme-ember-arena-preview">
-                        <div class="theme-name">Ember Arena</div>
-                        <div class="theme-colors">
-                            <span style="background: #f97316;"></span>
-                            <span style="background: #22c55e;"></span>
-                            <span style="background: #fb923c;"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theme-option" onclick="setTheme('theme-minimal-light')">
-                    <div class="theme-preview theme-minimal-light-preview">
-                        <div class="theme-name">Minimal Light</div>
-                        <div class="theme-colors">
-                            <span style="background: #2563eb;"></span>
-                            <span style="background: #16a34a;"></span>
-                            <span style="background: #dc2626;"></span>
-                        </div>
-                    </div>
+                <div class="modal-note">
+                    <span>??</span>
+                    <span>This will reset your current progress for today</span>
                 </div>
             </div>
-            
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-secondary" onclick="closeThemePicker()">Cancel</button>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeGoalModal()">Cancel</button>
+                <button class="modal-btn confirm" onclick="confirmGoalReset()">Set Goal</button>
             </div>
         </div>
     </div>
 
-    <!-- Create Counter Modal -->
-    <div class="modal-overlay" id="createCounterModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2 class="modal-title">Create New Counter</h2>
-                <p class="modal-subtitle">Set up your game tracking with a target goal</p>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="gameName">Game Name</label>
-                <input type="text" id="gameName" class="form-input" placeholder="e.g., League of Legends, Valorant">
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" for="targetMatches">Target Matches</label>
-                <input type="number" id="targetMatches" class="form-input" placeholder="e.g., 100" min="1" value="100">
-            </div>
-            
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-secondary" onclick="closeCreateModal()">Cancel</button>
-                <button class="modal-btn modal-btn-primary" onclick="createCounterFromModal()">Create Counter</button>
-            </div>
-        </div>
-    </div>
-
+    <script src="../main.js"></script>
     <script>
-        // Win Rate Counter v2 - Enhanced for Grinders
-        const WinRateCounter = {
-            // Data
-            counters: [],
-            selectedCounterId: null,
-            matches: [],
-            sessions: [],
-            settings: {
-                keyboardShortcuts: true,
-                sessionInactivity: 45,
-                trendWindow: 10,
-                animations: true,
-                celebrations: true
+        // Tracker functionality
+        const getDefaultTrackerData = () => ({
+            currentGamemode: 'quickmode',
+            dailyGoals: {
+                quickmode: null,
+                ranked: null,
+                checkmate: null
             },
-            
-            // Initialize
-            init() {
-                this.loadFromStorage();
-                this.loadThemeFromStorage();
-                this.initChessBackground();
-                this.initFloatingParticles();
-                this.setupKeyboardShortcuts();
-                this.render();
-                
-                if (this.counters.length > 0) {
-                    this.selectCounter(this.counters[0].id);
+            gamemodeData: {
+                quickmode: {
+                    totalGames: 0,
+                    totalWins: 0,
+                    totalLosses: 0,
+                    currentStreak: 0,
+                    streakType: 'none',
+                    bestStreak: 0,
+                    sessionGames: 0,
+                    recentGames: [],
+                    history: [] // Store last actions for undo
+                },
+                ranked: {
+                    totalGames: 0,
+                    totalWins: 0,
+                    totalLosses: 0,
+                    currentStreak: 0,
+                    streakType: 'none',
+                    bestStreak: 0,
+                    sessionGames: 0,
+                    recentGames: [],
+                    history: []
+                },
+                checkmate: {
+                    totalGames: 0,
+                    totalWins: 0,
+                    totalLosses: 0,
+                    currentStreak: 0,
+                    streakType: 'none',
+                    bestStreak: 0,
+                    sessionGames: 0,
+                    recentGames: [],
+                    history: []
                 }
-            },
-            
-            // Floating Particles
-            initFloatingParticles() {
-                if (!this.settings.animations) return;
-                
-                const container = document.getElementById('floatingParticles');
-                const particleCount = 20;
-                
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    
-                    // Random positioning
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.top = Math.random() * 100 + '%';
-                    
-                    // Random animation delay
-                    particle.style.animationDelay = Math.random() * 20 + 's';
-                    particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                    
-                    // Random size
-                    const size = 1 + Math.random() * 3;
-                    particle.style.width = size + 'px';
-                    particle.style.height = size + 'px';
-                    
-                    container.appendChild(particle);
-                }
-            },
-            
-            // Theme Management
-            loadThemeFromStorage() {
-                const savedTheme = localStorage.getItem('winrate-counter-theme');
-                if (savedTheme) {
-                    this.setTheme(savedTheme, false);
-                }
-            },
-            
-            setTheme(themeName, save = true) {
-                // Remove all theme classes
-                document.body.className = document.body.className.replace(/theme-\S+/g, '');
-                
-                // Add the new theme class
-                document.body.classList.add(themeName);
-                
-                // Save to localStorage
-                if (save) {
-                    localStorage.setItem('winrate-counter-theme', themeName);
-                }
-            },
-            
-            // Storage
-            loadFromStorage() {
-                const data = localStorage.getItem('winrate-counter-v2');
-                if (data) {
-                    const parsed = JSON.parse(data);
-                    this.counters = parsed.counters || [];
-                    this.matches = parsed.matches || [];
-                    this.sessions = parsed.sessions || [];
-                    this.settings = { ...this.settings, ...parsed.settings };
-                } else {
-                    // Migrate old data
-                    const oldCounters = localStorage.getItem('winrate-counters');
-                    const oldHistory = localStorage.getItem('winrate-history');
-                    if (oldCounters) {
-                        this.counters = JSON.parse(oldCounters);
-                        this.counters.forEach(counter => {
-                            counter.targetMatches = counter.targetMatches || null;
-                            counter.quickTags = counter.quickTags || [];
-                            counter.settings = {
-                                lossStreakWarning: true,
-                                lossStreakThreshold: 3,
-                                analytics: true,
-                                sessions: true
-                            };
-                        });
-                    }
-                    if (oldHistory) {
-                        const history = JSON.parse(oldHistory);
-                        this.matches = history.map(item => ({
-                            id: Date.now().toString() + Math.random(),
-                            counterId: item.counterId,
-                            result: item.type,
-                            tag: null,
-                            note: '',
-                            timestamp: item.timestamp,
-                            sessionId: this.getCurrentSessionId()
-                        }));
-                    }
-                }
-            },
-            
-            saveToStorage() {
-                const data = {
-                    counters: this.counters,
-                    matches: this.matches,
-                    sessions: this.sessions,
-                    settings: this.settings,
-                    version: '2.0'
-                };
-                localStorage.setItem('winrate-counter-v2', JSON.stringify(data));
-            },
-            
-            // Chess Background
-            initChessBackground() {
-                if (!this.settings.animations) return;
-                
-                const background = document.getElementById('chessBackground');
-                const pieces = {
-                    black: ['♔', '♕', '♖', '♗', '♘', '♙'],
-                    white: ['♚', '♛', '♜', '♝', '♞', '♟'],
-                    special: ['⚔', '⚕', '⚖', '⚗', '⚘']
-                };
-                
-                // Create 15 chess pieces with different colors and sizes
-                for (let i = 0; i < 15; i++) {
-                    const piece = document.createElement('div');
-                    
-                    // Randomly choose piece set and type
-                    const colorSet = Math.random() < 0.4 ? 'black' : Math.random() < 0.7 ? 'white' : 'special';
-                    const pieceSet = pieces[colorSet];
-                    const pieceType = pieceSet[Math.floor(Math.random() * pieceSet.length)];
-                    
-                    piece.className = `chess-piece ${colorSet}`;
-                    piece.textContent = pieceType;
-                    
-                    // Random positioning
-                    piece.style.left = Math.random() * 100 + '%';
-                    piece.style.top = Math.random() * 100 + '%';
-                    
-                    // Random size variation
-                    const size = 20 + Math.random() * 15;
-                    piece.style.fontSize = size + 'px';
-                    
-                    // Random animation timing
-                    piece.style.animationDelay = Math.random() * 30 + 's';
-                    piece.style.animationDuration = (20 + Math.random() * 15) + 's';
-                    
-                    // Add secondary animation for some pieces
-                    if (Math.random() < 0.3) {
-                        piece.style.animation += `, drift ${10 + Math.random() * 10}s infinite ease-in-out`;
-                    }
-                    
-                    background.appendChild(piece);
-                }
-            },
-            
-            // Keyboard Shortcuts
-            setupKeyboardShortcuts() {
-                if (!this.settings.keyboardShortcuts) return;
-                
-                document.addEventListener('keydown', (e) => {
-                    // Ignore if typing in input
-                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-                    
-                    switch(e.key.toLowerCase()) {
-                        case 'w':
-                            e.preventDefault();
-                            this.addWin();
-                            break;
-                        case 'l':
-                            e.preventDefault();
-                            this.addLoss();
-                            break;
-                        case 'z':
-                            e.preventDefault();
-                            this.undoLastAction();
-                            break;
-                    }
-                });
-            },
-            
-            // Counter Management
-            createCounter(title, targetMatches = null, quickTags = []) {
-                const counter = {
-                    id: Date.now().toString(),
-                    title,
-                    wins: 0,
-                    losses: 0,
-                    targetMatches,
-                    quickTags,
-                    settings: {
-                        lossStreakWarning: true,
-                        lossStreakThreshold: 3,
-                        analytics: true,
-                        sessions: true
-                    },
-                    createdAt: new Date().toISOString()
-                };
-                
-                this.counters.push(counter);
-                this.saveToStorage();
-                this.render();
-                this.selectCounter(counter.id);
-                
-                if (this.settings.celebrations) {
-                    this.showCelebration('🎯');
-                }
-            },
-            
-            deleteCounter(counterId) {
-                if (!confirm('Are you sure you want to delete this counter?')) return;
-                
-                this.counters = this.counters.filter(c => c.id !== counterId);
-                this.matches = this.matches.filter(m => m.counterId !== counterId);
-                
-                if (this.selectedCounterId === counterId) {
-                    this.selectedCounterId = null;
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            selectCounter(counterId) {
-                this.selectedCounterId = counterId;
-                this.render();
-            },
-            
-            updateCounterTitle(counterId, title) {
-                const counter = this.counters.find(c => c.id === counterId);
-                if (counter) {
-                    counter.title = title;
-                    this.saveToStorage();
-                    this.renderCountersList();
-                }
-            },
-            
-            resetCounter() {
-                if (!confirm('Are you sure you want to reset this counter? This will clear all wins and losses.')) return;
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    counter.wins = 0;
-                    counter.losses = 0;
-                    this.matches = this.matches.filter(m => m.counterId !== counter.id);
-                    this.saveToStorage();
-                    this.render();
-                }
-            },
-            
-            // Match Tracking
-            addWin(tag = null, note = '') {
-                if (!this.selectedCounterId) return;
-                
-                const match = {
-                    id: Date.now().toString(),
-                    counterId: this.selectedCounterId,
-                    result: 'win',
-                    tag,
-                    note,
-                    timestamp: new Date().toISOString(),
-                    sessionId: this.getCurrentSessionId()
-                };
-                
-                this.matches.push(match);
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    counter.wins++;
-                    this.checkCelebrations(counter);
-                    this.checkLossStreak(counter);
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            addLoss(tag = null, note = '') {
-                if (!this.selectedCounterId) return;
-                
-                const match = {
-                    id: Date.now().toString(),
-                    counterId: this.selectedCounterId,
-                    result: 'loss',
-                    tag,
-                    note,
-                    timestamp: new Date().toISOString(),
-                    sessionId: this.getCurrentSessionId()
-                };
-                
-                this.matches.push(match);
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    counter.losses++;
-                    this.checkLossStreak(counter);
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            undoLastAction() {
-                const counterMatches = this.matches.filter(m => m.counterId === this.selectedCounterId);
-                if (counterMatches.length === 0) return;
-                
-                const lastMatch = counterMatches[counterMatches.length - 1];
-                this.matches = this.matches.filter(m => m.id !== lastMatch.id);
-                
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                if (counter) {
-                    if (lastMatch.result === 'win') {
-                        counter.wins--;
-                    } else {
-                        counter.losses--;
-                    }
-                }
-                
-                this.saveToStorage();
-                this.render();
-            },
-            
-            // Session Management
-            getCurrentSessionId() {
-                const now = Date.now();
-                const inactivityMs = this.settings.sessionInactivity * 60 * 1000;
-                
-                // Find current or create new session
-                let currentSession = this.sessions.find(s => {
-                    const lastActivity = new Date(s.lastActivity).getTime();
-                    return (now - lastActivity) < inactivityMs;
-                });
-                
-                if (!currentSession) {
-                    currentSession = {
-                        id: Date.now().toString(),
-                        startTime: new Date().toISOString(),
-                        lastActivity: new Date().toISOString(),
-                        wins: 0,
-                        losses: 0
-                    };
-                    this.sessions.push(currentSession);
-                } else {
-                    currentSession.lastActivity = new Date().toISOString();
-                }
-                
-                return currentSession.id;
-            },
-            
-            // Analytics
-            calculateWinRate(wins, losses) {
-                const total = wins + losses;
-                if (total === 0) return 0;
-                return ((wins / total) * 100).toFixed(1);
-            },
-            
-            calculateTrend(counterId) {
-                const counterMatches = this.matches.filter(m => m.counterId === counterId);
-                const windowSize = this.settings.trendWindow;
-                
-                if (counterMatches.length < windowSize * 2) return 'stable';
-                
-                const recent = counterMatches.slice(-windowSize);
-                const previous = counterMatches.slice(-windowSize * 2, -windowSize);
-                
-                const recentWinRate = this.calculateWinRate(
-                    recent.filter(m => m.result === 'win').length,
-                    recent.filter(m => m.result === 'loss').length
-                );
-                
-                const previousWinRate = this.calculateWinRate(
-                    previous.filter(m => m.result === 'win').length,
-                    previous.filter(m => m.result === 'loss').length
-                );
-                
-                const diff = parseFloat(recentWinRate) - parseFloat(previousWinRate);
-                
-                if (diff > 5) return 'up';
-                if (diff < -5) return 'down';
-                return 'stable';
-            },
-            
-            getCurrentStreak(counterId) {
-                const counterMatches = this.matches.filter(m => m.counterId === counterId);
-                if (counterMatches.length === 0) return { type: 'none', length: 0 };
-                
-                let streak = 0;
-                let streakType = counterMatches[counterMatches.length - 1].result;
-                
-                for (let i = counterMatches.length - 1; i >= 0; i--) {
-                    if (counterMatches[i].result === streakType) {
-                        streak++;
-                    } else {
-                        break;
-                    }
-                }
-                
-                return { type: streakType, length: streak };
-            },
-            
-            // Celebrations
-            checkCelebrations(counter) {
-                const total = counter.wins + counter.losses;
-                
-                // Target goal reached
-                if (counter.targetMatches && total >= counter.targetMatches) {
-                    this.showCelebration('🎯 Goal Reached!');
-                }
-                
-                // Win streak milestones - ADD CONFETTI
-                const streak = this.getCurrentStreak(counter.id);
-                if (streak.type === 'win' && [3, 5, 10, 15].includes(streak.length)) {
-                    this.showCelebration(`🔥 ${streak.length} Win Streak!`);
-                    this.createConfetti();
-                }
-            },
-            
-            checkLossStreak(counter) {
-                if (!counter.settings.lossStreakWarning) return;
-                
-                const streak = this.getCurrentStreak(counter.id);
-                if (streak.type === 'loss' && streak.length >= counter.settings.lossStreakThreshold) {
-                    this.showStreakWarning(streak.length);
-                }
-            },
-            
-            showCelebration(text) {
-                if (!this.settings.celebrations) return;
-                
-                const celebration = document.createElement('div');
-                celebration.className = 'celebration';
-                celebration.textContent = text;
-                celebration.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 48px;
-                    font-weight: 700;
-                    color: var(--accent-green);
-                    text-shadow: 0 0 20px var(--accent-green);
-                    z-index: 2000;
-                    animation: celebrate 3s ease-out forwards;
-                    pointer-events: none;
-                `;
-                
-                document.body.appendChild(celebration);
-                
-                setTimeout(() => {
-                    document.body.removeChild(celebration);
-                }, 3000);
-            },
-            
-            showStreakWarning(length) {
-                // Create and show warning message
-                const warning = document.createElement('div');
-                warning.className = 'streak-warning';
-                warning.innerHTML = `
-                    <div class="streak-warning-text">
-                        🎮 You're on a ${length}-loss streak! 🎯 Time for a strategic break? 
-                        <br>Come back stronger and refreshed! ☕
-                    </div>
-                    <button class="streak-warning-close" onclick="this.parentElement.remove()">×</button>
-                `;
-                
-                // Add styles for the warning
-                warning.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: var(--gradient-red);
-                    color: white;
-                    padding: 16px 20px;
-                    border-radius: 12px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    z-index: 3000;
-                    animation: slideIn 0.5s ease;
-                    max-width: 320px;
-                    box-shadow: var(--shadow-lg);
-                    backdrop-filter: blur(10px);
-                `;
-                
-                document.body.appendChild(warning);
-                
-                // Auto-remove after 2 seconds
-                setTimeout(() => {
-                    if (warning.parentElement) {
-                        warning.remove();
-                    }
-                }, 2000);
-            },
-            
-            createConfetti() {
-                const colors = ['#10b981', '#f59e0b', '#06b6d4', '#8b5cf6', '#ec4899'];
-                const confettiCount = 30;
-                
-                for (let i = 0; i < confettiCount; i++) {
-                    const confetti = document.createElement('div');
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const size = Math.random() * 6 + 4;
-                    const startX = Math.random() * window.innerWidth;
-                    const startY = Math.random() * 200 + 100;
-                    
-                    confetti.style.cssText = `
-                        position: fixed;
-                        left: ${startX}px;
-                        top: ${startY}px;
-                        width: ${size}px;
-                        height: ${size}px;
-                        background: ${color};
-                        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-                        z-index: 9999;
-                        pointer-events: none;
-                        animation: confettiFall ${1.5 + Math.random() * 1.5}s linear forwards;
-                    `;
-                    
-                    document.body.appendChild(confetti);
-                    
-                    // Remove confetti after animation
-                    setTimeout(() => {
-                        confetti.remove();
-                    }, 3000);
-                }
-            },
-            
-            // Rendering
-            render() {
-                this.renderCountersList();
-                this.renderCounterDetails();
-            },
-            
-            renderCountersList() {
-                const container = document.getElementById('countersList');
-                
-                if (this.counters.length === 0) {
-                    container.innerHTML = `
-                        <div style="text-align: center; color: var(--text-secondary); padding: 32px;">
-                            <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;">🎮</div>
-                            <p>No counters yet</p>
-                            <p style="font-size: 12px; margin-top: 8px;">Create your first counter to start tracking</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                container.innerHTML = this.counters.map(counter => {
-                    const winRate = this.calculateWinRate(counter.wins, counter.losses);
-                    const trend = this.calculateTrend(counter.id);
-                    const isActive = counter.id === this.selectedCounterId;
-                    const trendIcon = trend === 'up' ? '▲' : trend === 'down' ? '▼' : '▬';
-                    
-                    return `
-                        <div class="counter-item ${isActive ? 'active' : ''}" onclick="WinRateCounter.selectCounter('${counter.id}')">
-                            <div class="counter-item-header">
-                                <div class="counter-title">${counter.title}</div>
-                                <div style="display: flex; align-items: center; gap: 4px;">
-                                    <span class="trend-indicator trend-${trend}">${trendIcon}</span>
-                                    <div class="win-rate-pill">${winRate}%</div>
-                                </div>
-                            </div>
-                            <div class="counter-stats">
-                                <div class="stat-item stat-wins">
-                                    <span>W:</span>
-                                    <span>${counter.wins}</span>
-                                </div>
-                                <div class="stat-item stat-losses">
-                                    <span>L:</span>
-                                    <span>${counter.losses}</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span>Total:</span>
-                                    <span>${counter.wins + counter.losses}</span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            },
-            
-            renderCounterDetails() {
-                const container = document.getElementById('counterDetails');
-                const counter = this.counters.find(c => c.id === this.selectedCounterId);
-                
-                if (!counter) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-icon">📊</div>
-                            <h2 class="empty-title">No Counter Selected</h2>
-                            <p class="empty-text">Select a counter from the left or create a new one to start tracking your win rate</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                const winRate = this.calculateWinRate(counter.wins, counter.losses);
-                const total = counter.wins + counter.losses;
-                const streak = this.getCurrentStreak(counter.id);
-                
-                container.innerHTML = `
-                    <div class="counter-detail-header">
-                        <input type="text" 
-                               class="detail-title-input" 
-                               value="${counter.title}" 
-                               onchange="WinRateCounter.updateCounterTitle('${counter.id}', this.value)"
-                               placeholder="Enter counter title...">
-                    </div>
-                    
-                    ${counter.targetMatches ? `
-                        <div class="progress-section">
-                            <div class="progress-header">
-                                <div class="progress-title">Match Progress</div>
-                                <div class="progress-text">${total} / ${counter.targetMatches} matches</div>
-                            </div>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar-fill ${total < counter.targetMatches * 0.33 ? 'low' : total < counter.targetMatches * 0.66 ? 'medium' : 'high'}" 
-                                     style="width: ${Math.min((total / counter.targetMatches) * 100, 100)}%">
-                                    <div class="progress-percentage">${Math.round(Math.min((total / counter.targetMatches) * 100, 100))}%</div>
-                                </div>
-                            </div>
-                        </div>
-                    ` : ''}
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-label">Wins</div>
-                            <div class="stat-value wins">${counter.wins}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Losses</div>
-                            <div class="stat-value losses">${counter.losses}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Total Games</div>
-                            <div class="stat-value total">${total}</div>
-                        </div>
-                        <div class="stat-card win-rate">
-                            <div class="stat-label">Win Rate</div>
-                            <div class="stat-value winrate">${winRate}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-win" onclick="WinRateCounter.addWin()">
-                            <span>🏆</span>
-                            <span>Win</span>
-                            <span class="keyboard-hint">W</span>
-                        </button>
-                        <button class="btn btn-loss" onclick="WinRateCounter.addLoss()">
-                            <span>💀</span>
-                            <span>Loss</span>
-                            <span class="keyboard-hint">L</span>
-                        </button>
-                    </div>
-                    
-                    <div class="secondary-actions">
-                        <button class="btn-secondary" onclick="WinRateCounter.undoLastAction()">
-                            <span>↩️</span>
-                            <span>Undo Last</span>
-                            <span class="keyboard-hint">Z</span>
-                        </button>
-                        <button class="btn-secondary" onclick="WinRateCounter.resetCounter()">
-                            <span>🔄</span>
-                            <span>Reset</span>
-                        </button>
-                        <button class="btn-secondary btn-danger" onclick="WinRateCounter.deleteCounter('${counter.id}')">
-                            <span>🗑️</span>
-                            <span>Delete</span>
-                        </button>
-                    </div>
-                `;
             }
-        };
-        
-        // Theme Picker Functions
-        function showThemePicker() {
-            document.getElementById('themePickerModal').classList.add('active');
+        });
+
+        let trackerData = getDefaultTrackerData();
+
+        // localStorage is blocked for some file:// contexts; fall back safely
+        function getSafeStorage() {
+            try {
+                const testKey = '__storage_test__';
+                localStorage.setItem(testKey, '1');
+                localStorage.removeItem(testKey);
+                return localStorage;
+            } catch (err) {
+                console.warn('localStorage unavailable; using in-memory tracker data only.', err);
+                return null;
+            }
         }
 
-        function closeThemePicker() {
-            document.getElementById('themePickerModal').classList.remove('active');
-        }
+        const trackerStorage = getSafeStorage();
 
-        function setTheme(themeName) {
-            WinRateCounter.setTheme(themeName);
-            closeThemePicker();
-        }
-        
-        // Modal Functions
-        function addNewCounter() {
-            showCreateModal();
-        }
-
-        function showCreateModal() {
-            document.getElementById('createCounterModal').classList.add('active');
-            document.getElementById('gameName').focus();
-        }
-
-        function closeCreateModal() {
-            document.getElementById('createCounterModal').classList.remove('active');
-            document.getElementById('gameName').value = '';
-            document.getElementById('targetMatches').value = '';
-        }
-        
-        function createCounterFromModal() {
-            const gameName = document.getElementById('gameName').value.trim();
-            const targetMatches = parseInt(document.getElementById('targetMatches').value) || null;
+        // Load data from storage (if available)
+        function loadTrackerData() {
+            if (trackerStorage) {
+                const saved = trackerStorage.getItem('anichessTracker');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    const defaults = getDefaultTrackerData();
+                    trackerData = {
+                        ...defaults,
+                        ...parsed,
+                        dailyGoals: {
+                            ...defaults.dailyGoals,
+                            ...(parsed.dailyGoals || {})
+                        },
+                        gamemodeData: {
+                            ...defaults.gamemodeData,
+                            ...(parsed.gamemodeData || {}),
+                            quickmode: {
+                                ...defaults.gamemodeData.quickmode,
+                                ...(parsed.gamemodeData ? parsed.gamemodeData.quickmode : {})
+                            },
+                            ranked: {
+                                ...defaults.gamemodeData.ranked,
+                                ...(parsed.gamemodeData ? parsed.gamemodeData.ranked : {})
+                            },
+                            checkmate: {
+                                ...defaults.gamemodeData.checkmate,
+                                ...(parsed.gamemodeData ? parsed.gamemodeData.checkmate : {})
+                            }
+                        }
+                    };
+                }
+            }
             
-            if (!gameName) {
-                alert('Please enter a game name');
+            // Reset quickmode daily goal every day
+            const today = new Date().toDateString();
+            const lastReset = trackerStorage ? trackerStorage.getItem('anichessTrackerReset') : null;
+            if (lastReset !== today) {
+                trackerData.gamemodeData.quickmode.sessionGames = 0;
+                if (trackerStorage) {
+                    trackerStorage.setItem('anichessTrackerReset', today);
+                }
+            }
+            
+            updateDisplay();
+            updateGamemodeUI();
+        }
+
+        // Save data to storage (if available)
+        function saveTrackerData() {
+            if (trackerStorage) {
+                trackerStorage.setItem('anichessTracker', JSON.stringify(trackerData));
+            }
+        }
+
+        // Select gamemode
+        function selectGamemode(mode) {
+            trackerData.currentGamemode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.gamemode-btn').forEach(btn => {
+                btn.classList.remove('active');
+                const icon = btn.querySelector('.gamemode-icon');
+                if (icon && btn.dataset.icon) {
+                    icon.src = btn.dataset.icon;
+                }
+            });
+            const activeBtn = document.querySelector(`[data-mode="${mode}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                const activeIcon = activeBtn.querySelector('.gamemode-icon');
+                if (activeIcon && activeBtn.dataset.iconSelected) {
+                    activeIcon.src = activeBtn.dataset.iconSelected;
+                }
+            }
+            
+            // Show/hide daily planning
+            const dailyPlanning = document.getElementById('dailyPlanning');
+            if (mode === 'quickmode') {
+                dailyPlanning.style.display = 'block';
+                updateQuickmodeProgress();
+            } else if (mode === 'ranked' || mode === 'checkmate') {
+                dailyPlanning.style.display = 'block';
+                updateGoalDisplay();
+            } else {
+                dailyPlanning.style.display = 'none';
+            }
+            
+            updateDisplay();
+            updateActionButtonsState();
+        }
+
+        // Update goal display
+        function updateGoalDisplay() {
+            const mode = trackerData.currentGamemode;
+            const goal = trackerData.dailyGoals[mode];
+            const goalValue = document.getElementById('currentGoalValue');
+            const progressDiv = document.getElementById('goalProgress');
+            const resetBtn = document.getElementById('resetGoalBtn');
+            
+            // Show reset button for Ranked and Checkmate modes
+            resetBtn.style.display = 'flex';
+            
+            if (goal) {
+                goalValue.textContent = goal + ' games';
+                progressDiv.style.display = 'block';
+                updateGoalProgress();
+            } else {
+                goalValue.textContent = 'Not Set';
+                progressDiv.style.display = 'none';
+            }
+            
+            updateActionButtonsState();
+        }
+
+        // Update Quickmode progress
+        function updateQuickmodeProgress() {
+            const goalValue = document.getElementById('currentGoalValue');
+            const progressDiv = document.getElementById('goalProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const resetBtn = document.getElementById('resetGoalBtn');
+            
+            const goal = 70; // Fixed goal for Quickmode
+            const current = trackerData.gamemodeData.quickmode.sessionGames;
+            
+            goalValue.textContent = goal + ' games';
+            progressDiv.style.display = 'block';
+            resetBtn.style.display = 'none'; // Hide reset button for Quickmode
+            
+            const percentage = Math.min((current / goal) * 100, 100);
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = `${current} / ${goal} games completed`;
+            
+            if (current >= goal) {
+                progressFill.style.background = 'linear-gradient(90deg, var(--success), #059669)';
+                if (!progressFill.classList.contains('completed')) {
+                    progressFill.classList.add('completed');
+                    showToast('Quickmode daily goal completed! ??');
+                }
+            } else {
+                progressFill.style.background = 'linear-gradient(90deg, var(--accent), var(--accent-secondary))';
+                progressFill.classList.remove('completed');
+            }
+        }
+
+        // Open goal modal
+        function openGoalModal() {
+            const mode = trackerData.currentGamemode;
+            
+            // Don't allow modal for Quickmode (fixed goal)
+            if (mode === 'quickmode') {
+                showToast('Quickmode has a fixed goal of 70 games! ?');
                 return;
             }
             
-            WinRateCounter.createCounter(gameName, targetMatches);
-            closeCreateModal();
+            const modal = document.getElementById('goalModal');
+            const gamemodeSpan = document.getElementById('modalGamemode');
+            const input = document.getElementById('modalGoalInput');
+            
+            // Set current gamemode in modal
+            gamemodeSpan.textContent = trackerData.currentGamemode.charAt(0).toUpperCase() + trackerData.currentGamemode.slice(1);
+            
+            // Set current goal as default value
+            const currentGoal = trackerData.dailyGoals[trackerData.currentGamemode];
+            input.value = currentGoal || 10;
+            
+            // Show modal
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+            
+            // Focus input
+            setTimeout(() => {
+                input.focus();
+                input.select();
+            }, 300);
         }
-        
-        // Footer Functions
-        function copyWalletAddress() {
-            const address = '0xAadb63A5bbcd64A1f8a9cbAF51CBDFd514254056';
-            navigator.clipboard.writeText(address).then(() => {
-                const btn = document.getElementById('copyBtn');
-                const originalText = btn.textContent;
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                
+
+        // Close goal modal
+        function closeGoalModal() {
+            const modal = document.getElementById('goalModal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Confirm goal reset
+        function confirmGoalReset() {
+            const input = document.getElementById('modalGoalInput');
+            const goal = parseInt(input.value);
+            
+            if (goal > 0 && goal <= 50) {
+                const mode = trackerData.currentGamemode;
+                trackerData.dailyGoals[mode] = goal;
+                trackerData.gamemodeData[mode].sessionGames = 0; // Reset progress
+                saveTrackerData();
+                updateGoalDisplay();
+                updateGoalProgress();
+                updateActionButtonsState();
+                closeGoalModal();
+                showToast(`Daily goal reset to ${goal} games for ${mode}! ??`);
+            } else {
+                // Shake input for invalid value
+                input.style.animation = 'shake 0.5s';
                 setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
+                    input.style.animation = '';
+                }, 500);
+                showToast('Please enter a valid goal between 1 and 50 games');
+            }
+        }
+
+        // Streak notification
+        function showStreakNotification(type, streak) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 120px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                font-weight: 600;
+                z-index: 10001;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                min-width: 200px;
+            `;
+            
+            if (type === 'win') {
+                notification.style.background = 'linear-gradient(135deg, var(--success), #059669)';
+                notification.style.color = 'white';
+                notification.style.boxShadow = '0 8px 25px rgba(16, 185, 129, 0.4)';
+                notification.innerHTML = `
+                    <span style="font-size: 1.5rem;">??</span>
+                    <span>${streak} Win Streak!</span>
+                `;
+            } else {
+                notification.style.background = 'linear-gradient(135deg, var(--danger), #dc2626)';
+                notification.style.color = 'white';
+                notification.style.boxShadow = '0 8px 25px rgba(239, 68, 68, 0.4)';
+                notification.innerHTML = `
+                    <span style="font-size: 1.5rem;">??</span>
+                    <span>Rest up! ${streak} Loss Streak</span>
+                `;
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 4 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+
+        // Confetti celebration
+        function createConfetti() {
+            const colors = ['#19e6ff', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 8 + 4;
+                const startX = Math.random() * window.innerWidth;
+                const startY = -20;
+                
+                confetti.style.cssText = `
+                    position: fixed;
+                    left: ${startX}px;
+                    top: ${startY}px;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${color};
+                    opacity: ${Math.random() * 0.5 + 0.5};
+                    transform: rotate(${Math.random() * 360}deg);
+                    z-index: 10002;
+                    pointer-events: none;
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                // Animate confetti
+                const duration = Math.random() * 2 + 1;
+                const distance = Math.random() * 300 + 200;
+                const rotation = Math.random() * 720 - 360;
+                
+                confetti.animate([
+                    { 
+                        transform: `translateY(0) rotate(0deg)`,
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translateY(${window.innerHeight}px) translateX(${(Math.random() - 0.5) * distance}px) rotate(${rotation}deg)`,
+                        opacity: 0 
+                    }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                }, () => {
+                    document.body.removeChild(confetti);
+                });
+            }
+        }
+
+        // Close modal on overlay click
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'goalModal') {
+                closeGoalModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('goalModal').classList.contains('active')) {
+                closeGoalModal();
+            }
+        });
+
+        // Handle Enter key in modal input
+        document.getElementById('modalGoalInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                confirmGoalReset();
+            }
+        });
+
+        // Update goal progress
+        function updateGoalProgress() {
+            const mode = trackerData.currentGamemode;
+            const goal = trackerData.dailyGoals[mode];
+            const current = trackerData.gamemodeData[mode].sessionGames;
+            
+            const progressDiv = document.getElementById('goalProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
+            if (goal) {
+                progressDiv.style.display = 'block';
+                const percentage = Math.min((current / goal) * 100, 100);
+                progressFill.style.width = percentage + '%';
+                progressText.textContent = `${current} / ${goal} games completed`;
+                
+                if (current >= goal) {
+                    progressFill.style.background = 'linear-gradient(90deg, var(--success), #059669)';
+                    showToast(`Daily goal completed! ??`);
+                } else {
+                    progressFill.style.background = 'linear-gradient(90deg, var(--accent), var(--accent-secondary))';
+                }
+            } else if (mode !== 'quickmode') {
+                progressDiv.style.display = 'block';
+                const percentage = Math.min((current / 10) * 100, 100);
+                progressFill.style.width = percentage + '%';
+                progressText.textContent = `${current} games recorded`;
+                progressFill.style.background = 'linear-gradient(90deg, var(--accent), var(--accent-secondary))';
+            }
+        }
+
+        // Record a win
+        function recordWin() {
+            const mode = trackerData.currentGamemode;
+            const data = trackerData.gamemodeData[mode];
+            
+            // Store current state for undo
+            const previousState = {
+                totalGames: data.totalGames,
+                totalWins: data.totalWins,
+                totalLosses: data.totalLosses,
+                currentStreak: data.currentStreak,
+                streakType: data.streakType,
+                bestStreak: data.bestStreak,
+                sessionGames: data.sessionGames,
+                recentGames: [...data.recentGames]
+            };
+            
+            data.totalGames++;
+            data.totalWins++;
+            data.sessionGames++;
+            
+            const previousStreakType = data.streakType;
+            const previousStreak = data.currentStreak;
+            
+            if (data.streakType === 'win') {
+                data.currentStreak++;
+            } else {
+                data.currentStreak = 1;
+                data.streakType = 'win';
+            }
+            
+            if (data.currentStreak > data.bestStreak) {
+                data.bestStreak = data.currentStreak;
+            }
+            
+            data.recentGames.unshift('W');
+            if (data.recentGames.length > 10) {
+                data.recentGames.pop();
+            }
+            
+            // Add to history
+            data.history.unshift({
+                action: 'win',
+                previousState: previousState,
+                timestamp: Date.now()
+            });
+            
+            // Limit history to 10 actions
+            if (data.history.length > 10) {
+                data.history.pop();
+            }
+            
+            saveTrackerData();
+            updateDisplay();
+            updateUndoButton();
+            updateActionButtonsState();
+            
+            // Update progress based on mode
+            if (mode === 'quickmode') {
+                updateQuickmodeProgress();
+            } else {
+                updateGoalProgress();
+            }
+            
+            // Check for win streak notifications
+            if (data.currentStreak === 3 && previousStreak < 3) {
+                showStreakNotification('win', 3);
+                createConfetti();
+            } else if (data.currentStreak === 5) {
+                showStreakNotification('win', 5);
+                createConfetti();
+            } else if (data.currentStreak === 10) {
+                showStreakNotification('win', 10);
+                createConfetti();
+            } else if (data.currentStreak > 0 && data.currentStreak % 5 === 0) {
+                showStreakNotification('win', data.currentStreak);
+            }
+            
+            showToast('Win recorded! ??');
+        }
+
+        // Record a loss
+        function recordLoss() {
+            const mode = trackerData.currentGamemode;
+            const data = trackerData.gamemodeData[mode];
+            
+            // Store current state for undo
+            const previousState = {
+                totalGames: data.totalGames,
+                totalWins: data.totalWins,
+                totalLosses: data.totalLosses,
+                currentStreak: data.currentStreak,
+                streakType: data.streakType,
+                bestStreak: data.bestStreak,
+                sessionGames: data.sessionGames,
+                recentGames: [...data.recentGames]
+            };
+            
+            data.totalGames++;
+            data.totalLosses++;
+            data.sessionGames++;
+            
+            const previousStreakType = data.streakType;
+            const previousStreak = data.currentStreak;
+            
+            if (data.streakType === 'loss') {
+                data.currentStreak++;
+            } else {
+                data.currentStreak = 1;
+                data.streakType = 'loss';
+            }
+            
+            // Check for lose streak notification
+            if (data.currentStreak === 3 && previousStreakType === 'win') {
+                showStreakNotification('lose', 3);
+            } else if (data.currentStreak === 5 && previousStreakType === 'win') {
+                showStreakNotification('lose', 5);
+            } else if (data.currentStreak >= 3 && data.currentStreak % 3 === 0) {
+                showStreakNotification('lose', data.currentStreak);
+            }
+            
+            data.recentGames.unshift('L');
+            if (data.recentGames.length > 10) {
+                data.recentGames.pop();
+            }
+            
+            // Add to history
+            data.history.unshift({
+                action: 'loss',
+                previousState: previousState,
+                timestamp: Date.now()
+            });
+            
+            // Limit history to 10 actions
+            if (data.history.length > 10) {
+                data.history.pop();
+            }
+            
+            saveTrackerData();
+            updateDisplay();
+            updateUndoButton();
+            updateActionButtonsState();
+            
+            // Update progress based on mode
+            if (mode === 'quickmode') {
+                updateQuickmodeProgress();
+            } else {
+                updateGoalProgress();
+            }
+            
+            showToast('Loss recorded. Keep going! ??');
+        }
+
+        // Undo last action
+        function undoLastAction() {
+            const mode = trackerData.currentGamemode;
+            const data = trackerData.gamemodeData[mode];
+            
+            if (data.history.length === 0) {
+                showToast('No actions to undo! ??');
+                return;
+            }
+            
+            const lastAction = data.history[0];
+            const previousState = lastAction.previousState;
+            
+            // Restore previous state
+            data.totalGames = previousState.totalGames;
+            data.totalWins = previousState.totalWins;
+            data.totalLosses = previousState.totalLosses;
+            data.currentStreak = previousState.currentStreak;
+            data.streakType = previousState.streakType;
+            data.bestStreak = previousState.bestStreak;
+            data.sessionGames = previousState.sessionGames;
+            data.recentGames = [...previousState.recentGames];
+            
+            // Remove from history
+            data.history.shift();
+            
+            saveTrackerData();
+            updateDisplay();
+            updateUndoButton();
+            
+            // Update progress based on mode
+            if (mode === 'quickmode') {
+                updateQuickmodeProgress();
+            } else {
+                updateGoalProgress();
+            }
+            
+            showToast(`Undid ${lastAction.action}! ??`);
+        }
+
+        // Update undo button state
+        function updateUndoButton() {
+            const mode = trackerData.currentGamemode;
+            const data = trackerData.gamemodeData[mode];
+            const goal = trackerData.dailyGoals[mode];
+            const undoBtn = document.querySelector('.btn-undo');
+            
+            if (undoBtn) {
+                // Only update undo button if buttons are not disabled due to no goal
+                if ((mode === 'quickmode' || goal)) {
+                    if (data.history.length > 0) {
+                        undoBtn.disabled = false;
+                    } else {
+                        undoBtn.disabled = true;
+                    }
+                }
+            }
+        }
+
+        // Update action buttons state (disable if no goal set for ranked/checkmate)
+        function updateActionButtonsState() {
+            const mode = trackerData.currentGamemode;
+            const goal = trackerData.dailyGoals[mode];
+            const winBtn = document.querySelector('.btn-win');
+            const lossBtn = document.querySelector('.btn-loss');
+            const undoBtn = document.querySelector('.btn-undo');
+            const goalNotice = document.getElementById('goalNotice');
+            const currentGoalValue = document.getElementById('currentGoalValue');
+            
+            if (winBtn && lossBtn && undoBtn) {
+                if ((mode === 'ranked' || mode === 'checkmate') && !goal) {
+                    winBtn.disabled = true;
+                    lossBtn.disabled = true;
+                    undoBtn.disabled = true;
+                    winBtn.title = 'Set a goal first!';
+                    lossBtn.title = 'Set a goal first!';
+                    undoBtn.title = 'Set a goal first!';
+                    if (goalNotice) goalNotice.style.display = 'flex';
+                    if (currentGoalValue) currentGoalValue.classList.add('not-set');
+                } else {
+                    winBtn.disabled = false;
+                    lossBtn.disabled = false;
+                    winBtn.title = '';
+                    lossBtn.title = '';
+                    undoBtn.title = '';
+                    if (goalNotice) goalNotice.style.display = 'none';
+                    if (currentGoalValue) currentGoalValue.classList.remove('not-set');
+                    updateUndoButton();
+                }
+            }
+        }
+
+        // Update display
+        function updateDisplay() {
+            const mode = trackerData.currentGamemode;
+            const data = trackerData.gamemodeData[mode];
+            
+            document.getElementById('totalGames').textContent = data.totalGames;
+            document.getElementById('totalWins').textContent = data.totalWins;
+            document.getElementById('totalLosses').textContent = data.totalLosses;
+            document.getElementById('currentStreak').textContent = data.currentStreak;
+            document.getElementById('bestStreak').textContent = data.bestStreak;
+            document.getElementById('sessionGames').textContent = data.sessionGames;
+            
+            const winPercentage = data.totalGames > 0 ? 
+                ((data.totalWins / data.totalGames) * 100).toFixed(1) : 0;
+            const lossPercentage = data.totalGames > 0 ? 
+                ((data.totalLosses / data.totalGames) * 100).toFixed(1) : 0;
+            
+            document.getElementById('winPercentage').textContent = winPercentage + '%';
+            document.getElementById('lossPercentage').textContent = lossPercentage + '%';
+            
+            const streakTypeText = data.streakType === 'win' ? 'Win Streak' : 
+                                  data.streakType === 'loss' ? 'Loss Streak' : 'None';
+            document.getElementById('streakType').textContent = streakTypeText;
+            
+            const recentForm = data.recentGames.slice(0, 5).join(' ');
+            document.getElementById('recentForm').textContent = recentForm || '-';
+        }
+
+        // Update gamemode UI
+        function updateGamemodeUI() {
+            selectGamemode(trackerData.currentGamemode);
+            updateUndoButton();
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+                color: var(--bg-main);
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 8px 25px rgba(25, 230, 255, 0.4);
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTrackerData();
+            updateActionButtonsState();
+            if (typeof initChessBackground === 'function') {
+                initChessBackground();
+            }
+            initSidebarToggle();
+        });
+
+        function initSidebarToggle() {
+            const sidebar = document.getElementById('trackerSidebar');
+            const toggle = document.getElementById('sidebarToggle');
+            if (!sidebar || !toggle) return;
+
+            const stored = trackerStorage ? trackerStorage.getItem('trackerSidebarCollapsed') : null;
+            if (stored === 'true') {
+                sidebar.classList.add('collapsed');
+                toggle.textContent = 'Expand';
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+
+            toggle.addEventListener('click', () => {
+                const isCollapsed = sidebar.classList.toggle('collapsed');
+                toggle.textContent = isCollapsed ? 'Expand' : 'Minimize';
+                toggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                if (trackerStorage) {
+                    trackerStorage.setItem('trackerSidebarCollapsed', String(isCollapsed));
+                }
             });
         }
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', () => {
-            WinRateCounter.init();
-        });
     </script>
 </body>
 </html>
+
