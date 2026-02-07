@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="theme-1">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anichess Companion - Track Your Checkmate Arena Performance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Favicons -->
-    <link rel="icon" href="/assets/icon-logo.png" sizes="any">
 </head>
 <body>
     <!-- Chess Background Animation -->
@@ -30,10 +31,7 @@
                 <a href="#" class="nav-link disabled" data-tooltip="Coming soon">Leaderboard</a>
                 <a href="#" class="nav-link disabled" data-tooltip="Coming soon">Matches</a>
                 <a href="#" class="nav-link disabled" data-tooltip="Coming soon">Profiles</a>
-                <a href="#" class="download-btn">
-                    <span>📥</span>
-                    <span>Download</span>
-                </a>
+                <a href="#" class="download-btn"><span>Sign In</span></a>
             </div>
         </div>
     </nav>
@@ -82,10 +80,13 @@
                 </div>
             </div>
         </div>
+        <button class="scroll-hint" aria-label="Scroll down" data-scroll-target="#how-it-works">
+            <span class="scroll-hint-dot"></span>
+        </button>
     </section>
 
     <!-- How It Works -->
-    <section class="section">
+    <section class="section" id="how-it-works">
         <div class="how-it-works">
             <h2 class="section-title">How It Works</h2>
             <p class="section-subtitle">Simple setup, powerful insights</p>
@@ -188,6 +189,7 @@
                 <a href="#" class="footer-link">Support</a>
                 <a href="#" class="footer-link">GitHub</a>
             </div>
+            <a class="site-credit" href="https://twitter.com/riisui_" target="_blank" rel="noopener noreferrer">Made by @riisui_</a>
             <!-- Main copyright and branding -->
             <p>&copy; 2026 Anichess Companion. Built for players, by players.</p>
             <!-- Licensing notice for deterrence -->
